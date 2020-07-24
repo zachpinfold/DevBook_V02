@@ -8,6 +8,7 @@ const normalize = require("normalize-url");
 const { v4: uuidv4 } = require("uuid");
 const AWS = require("aws-sdk");
 const multer = require("multer");
+const awsConfig = require("../../config/AWS");
 
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
@@ -352,13 +353,18 @@ const storage = multer.memoryStorage({
 
 const upload = multer({ storage }).single("image");
 
+console.log();
+
 const s3 = new AWS.S3({
-  accessKeyId: "AKIAJO6WBXQ55A3HFMEQ",
-  secretAccessKey: "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"
+  accessKeyId: awsConfig.awsConfig.accessKeyId,
+  secretAccessKey: awsConfig.awsConfig.secretAcessKey
 });
 
-router.post("/profile_image", upload, async (req, res) => {
-  console.log("hello");
+router.post("/profile_image", auth, upload, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
   let myFile = req.file.originalname.split(".");
   const fileType = myFile[myFile.length - 1];
@@ -369,14 +375,26 @@ router.post("/profile_image", upload, async (req, res) => {
     Body: req.file.buffer
   };
 
-  s3.upload(params, (error, data) => {
-    if (error) {
-      console.log(error);
+  s3.upload(params, async (error, data) => {
+    const { key } = data;
+    const profileFields = {
+      user: req.user.id,
+      profilePic: key
+    };
+    // console.log(params);
+    console.log(req.user.id);
 
-      res.status(500).send(error);
+    try {
+      let profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true, upsert: true }
+      );
+      res.status(200).send(profile);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Server Error");
     }
-
-    res.status(200).send(data);
   });
 });
 
