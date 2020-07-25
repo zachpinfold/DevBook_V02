@@ -1,0 +1,689 @@
+:root {
+  --blue: #00b3c4;
+  --orange: #ff6459;
+  --greenL: #02393f;
+  --futuraBold: "Futura LT W01 Bold";
+  --futuraMedium: "Futura LT W01 Medium";
+  --helveticaMedium: "Helvetica Medium";
+  --helveticaLight: "Helvetica Light";
+}
+
+@font-face {
+  font-family: "Nimbus";
+  src: url("fonts/NimbusSansBeckerPBla.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Futura LT W01 Bold";
+  src: url("fonts/184895ac-545b-450b-9d3a-c0a0a7620977.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Futura LT W01 Medium";
+  src: url("fonts/6c72b0cb-89a1-4da9-8574-9244967bd9d6.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Helvetica Medium";
+  src: url("fonts/240c57a0-fdce-440d-9ce3-85e0cb56f470.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Helvetica Light";
+  src: url("fonts/f9c5199e-a996-4c08-9042-1eb845bb7495.woff2") format("woff2");
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+/* ALERTS */
+
+.alert {
+  border-radius: 3px;
+  color: white;
+  font-family: var(--helveticaMedium);
+  padding: 8px;
+}
+
+.alert-danger {
+  background-color: var(--orange);
+}
+
+body {
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  background-color: #02393f;
+  /* position: relative; */
+}
+
+.main-centre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: relative; */
+  margin-top: 6rem;
+}
+
+body::after {
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-size: 12px 12px;
+  background-image: linear-gradient(to right, black 0.5px, transparent 1px),
+    linear-gradient(to bottom, black 0.5px, transparent 1px);
+  opacity: 0.11;
+}
+
+h1 {
+  font-family: "Nimbus";
+  font-size: 130px;
+  color: white;
+  letter-spacing: 5px;
+}
+
+h2 {
+  font-family: "Futura LT W01 Bold";
+  color: white;
+  font-size: 25px;
+}
+
+h3 {
+  font-family: "Futura LT W01 Medium";
+  color: white;
+  font-size: 25px;
+}
+
+h4 {
+  font-family: "Helvetica Light";
+  color: white;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.line-break {
+  height: 1px;
+  margin: 20px 0;
+  background-color: var(--blue);
+}
+
+/* NavBar  */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  /* background-color: antiquewhite; */
+  /* padding: 0.7rem 2rem; */
+  position: fixed;
+  z-index: 1;
+  height: 100px;
+  width: 100%;
+  top: 0;
+  border-bottom: solid 1px var(--primary-color);
+  opacity: 0.9;
+}
+
+.navbar ul {
+  display: flex;
+  font-family: var(--futuraBold);
+  margin-right: 20px;
+  list-style-type: none;
+}
+
+.navbar a {
+  color: #fff;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+/* Homepage */
+
+.main-section {
+  width: 880px;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.main-div {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.left-div {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.right-div {
+  flex: 1;
+  position: relative;
+  height: 330px;
+}
+
+.left-div-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage-buttons {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: -23px;
+  right: 0px;
+  font-size: 18px;
+}
+
+/* .btn {
+  width: 220px;
+  margin-top: 20px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid black;
+  transition-timing-function: ease-out;
+  transition: 0.5s;
+} */
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn-primary {
+  margin-top: 20px;
+  display: inline-block;
+  width: 225px;
+  padding: 10px 0px 10px 0px;
+  border: 2px solid black;
+  border-radius: 5px;
+  color: black;
+  text-decoration: none;
+  background-color: #00b3c4;
+  font-family: "Futura LT W01 Bold";
+  font-size: 20px;
+  transition: 0.4s;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  cursor: pointer;
+  background-color: var(--orange);
+}
+
+.btn-secondary {
+  background-color: var(--orange);
+  font-size: 20px;
+}
+
+.btn-secondary:hover {
+  background-color: var(--blue);
+}
+
+/* Register page */
+
+.login-buttons {
+  width: 228px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.h1-top-nav {
+  font-size: 40px;
+  letter-spacing: 1px;
+}
+
+.main-section-2 {
+  width: 760px;
+  margin-top: 60px;
+}
+
+.heading {
+  font-size: 45px;
+  color: white;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-headings {
+  margin: 0 0 10px 0;
+}
+
+.main-div-2 {
+  width: 100%;
+}
+
+.form .form-group {
+  margin: 30px 0;
+}
+
+.form .form-text {
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.form input[type="text"],
+.form input[type="email"],
+.form input[type="password"],
+.form input[type="date"],
+.form select,
+.form textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 15px;
+  font-size: 1.2rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  font-family: "Helvetica Light";
+  font-size: 22px;
+}
+
+.input-half {
+  /* width: 300px; */
+  margin-right: 40px;
+  flex: 1;
+}
+
+.input-half-right {
+  flex: 1;
+}
+
+.input-regular {
+  width: 100%;
+}
+
+::placeholder {
+  color: black;
+  font-family: "Futura LT W01 Medium";
+  font-size: 22px;
+  opacity: 0.8;
+}
+
+:focus {
+  outline: 0;
+}
+
+@media (max-width: 920px) {
+  .main-section-2 {
+    padding: 20px;
+    background-color: red;
+  }
+  .form-group {
+    flex-direction: column;
+  }
+  .input-half {
+    /* width: 300px; */
+    margin-right: 0px;
+    flex: 1;
+  }
+  .input-half {
+    margin-bottom: 30px;
+    flex: 1;
+  }
+}
+
+/* Profile setup */
+
+.main-section-3 {
+  /* background-color: white; */
+  width: 880px;
+  margin-top: 200px;
+  margin-bottom: 50px;
+  border-radius: 15px;
+}
+
+select {
+  width: 268px;
+  padding: 10px;
+  font-size: 16px;
+  /* line-height: 1; */
+  border: 0;
+  border-radius: 5px;
+  height: 50px;
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+    no-repeat right #ddd;
+  -webkit-appearance: none;
+  background-position-x: 380px;
+}
+
+.drop-down {
+  background-color: var(--orange);
+  padding-right: 10px;
+}
+
+.form .form-profile {
+  margin: 20px 0px 0px 0px;
+}
+
+.new-profile-div {
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+}
+
+.left-profile {
+  flex: 1;
+}
+
+.right-profile {
+  flex: 1;
+  padding: 0 0px 30px 50px;
+}
+
+.right-profile-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.top-profile-mockup {
+  flex: 1;
+}
+.top-right-profile-mockup {
+  margin-left: 30px;
+  flex: 1;
+}
+
+.btn-create {
+  margin-top: 40px;
+}
+
+.btn-no-margin {
+  margin-top: 0px;
+}
+
+.avatar-profile {
+  height: 190px;
+  width: 190px;
+  border: 2px solid white;
+  border-radius: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: "Futura LT W01 Bold";
+  opacity: 0.2;
+}
+
+.position-profile {
+  height: 40px;
+  /* width: 190px; */
+  border: 2px solid white;
+  margin-top: 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: "Futura LT W01 Bold";
+  opacity: 0.2;
+}
+
+.about-profile {
+  height: 80px;
+  /* width: 100%; */
+  border: 2px solid white;
+  margin-top: 40px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: "Futura LT W01 Bold";
+  opacity: 0.2;
+}
+
+.skills {
+  margin-top: 20px;
+  height: 30px;
+}
+
+.form-complete {
+  border: 2px solid var(--blue);
+  opacity: 1;
+  color: var(--blue);
+}
+
+@media (min-width: 920px) {
+  .btn-hide-mob {
+    display: none;
+  }
+}
+
+@media (max-width: 920px) {
+  .new-profile-div {
+    flex-direction: column;
+  }
+  .btn-hide {
+    display: none;
+  }
+  .main-section-3 {
+    padding: 20px;
+    /* background-color: red; */
+  }
+  .right-profile {
+    margin-top: 30px;
+    padding: 0;
+  }
+}
+
+/* Profile Page */
+
+.main-section-4 {
+  width: 880px;
+  margin-top: 200px;
+  margin-bottom: 50px;
+  border-radius: 15px;
+}
+
+.profile-div {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-profile-div {
+  flex: 1;
+}
+
+.right-profile-div {
+  flex: 3;
+}
+
+.profile-image {
+  flex: 1;
+  border: solid 2px;
+  border-radius: 600px;
+  width: 100%;
+}
+
+.profile-name {
+  margin-top: 10px;
+  font-family: var(--futuraBold);
+  color: white;
+  font-size: 24px;
+}
+
+.profile-location {
+  font-family: var(--futuraMedium);
+  color: var(--blue);
+  font-size: 24px;
+  letter-spacing: 1.2px;
+}
+
+.profile-profession {
+  margin-top: 20px;
+  font-family: var(--helveticaMedium);
+  color: var(--greenL);
+  font-size: 18px;
+}
+
+.profile-left-info {
+  flex: 1;
+
+  padding: 20px;
+}
+
+.btn-website {
+  margin-top: 40px;
+  display: inline-block;
+  width: 100%;
+  /* padding: 5px 0px 5px 0px; */
+  border: 2px solid black;
+  border-radius: 5px;
+  color: black;
+  text-decoration: none;
+  background-color: #00b3c4;
+  font-family: "Futura LT W01 Bold";
+  font-size: 18px;
+  transition: 0.4s;
+  text-align: center;
+}
+
+.btn-website:hover {
+  cursor: pointer;
+  background-color: var(--orange);
+}
+
+.btn-CV {
+  margin-top: 10px;
+  display: inline-block;
+  width: 100%;
+  /* padding: 5px 0px 5px 0px; */
+  border: 2px solid black;
+  border-radius: 5px;
+  color: black;
+  text-decoration: none;
+  background-color: var(--orange);
+  font-family: "Futura LT W01 Bold";
+  font-size: 18px;
+  transition: 0.4s;
+  text-align: center;
+}
+
+.btn-CV:hover {
+  cursor: pointer;
+  background-color: var(--blue);
+}
+
+.repo {
+  margin-bottom: 25px;
+
+  width: 150px;
+}
+
+.profile-right-info {
+  padding: 0px 0px 0px 50px;
+}
+
+.profile-sub {
+  margin-top: 30px;
+  font-family: var(--futuraBold);
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+
+.profile-copy {
+  font-family: var(--helveticaLight);
+  letter-spacing: 1.1px;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.experience-company {
+  font-family: var(--futuraBold);
+  color: white;
+  font-size: 20px;
+}
+
+.experience-time {
+  font-family: var(--helveticaLight);
+  color: white;
+  margin-bottom: 12px;
+  opacity: 0.7;
+}
+
+.experience-title {
+  margin-top: 5px;
+  font-family: var(--futuraBold);
+  color: white;
+  font-size: 20px;
+}
+
+.repo-copy {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 920px) {
+  /* .main-section-4 {
+    flex-direction: column;
+  } */
+  .profile-div {
+    /* background-color: var(--blue); */
+    flex-direction: column;
+    padding: 20px;
+  }
+  .left-profile-div {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+  }
+  .profile-image {
+    height: auto;
+    width: 200px;
+  }
+  .btn-website {
+    width: 130px;
+  }
+  .btn-CV {
+    width: 130px;
+  }
+  .btn-hide {
+    display: none;
+  }
+  .profile-right-info {
+    padding: 0;
+  }
+  .main-section-3 {
+    padding: 20px;
+    /* background-color: red; */
+  }
+  .right-profile {
+    margin-top: 30px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 450px) {
+  .left-profile-div {
+    flex-direction: column;
+  }
+
+  .profile-left-info {
+    padding: 0px;
+  }
+
+  .main-section-4 {
+    margin-top: 125px;
+  }
+}
