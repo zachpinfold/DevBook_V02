@@ -60,7 +60,9 @@ const Login = ({ login, isAuthenticated }) => {
           </div>
           <div className='login-buttons'>
             <input type='submit' className='btn-primary' value='Login' />
-            <h4 style={{ marginTop: "20px" }}>Don't have an account?</h4>
+            <h4 style={{ marginTop: "20px", fontSize: "13px" }}>
+              Don't have an account?
+            </h4>
             <Link to='/register'>
               <button
                 style={{ marginTop: "10px" }}

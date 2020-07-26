@@ -45,6 +45,7 @@ router.post(
     ]
   ],
   async (req, res) => {
+    console.log(req.user);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -353,14 +354,14 @@ const storage = multer.memoryStorage({
 
 const upload = multer({ storage }).single("image");
 
-console.log();
-
 const s3 = new AWS.S3({
   accessKeyId: awsConfig.awsConfig.accessKeyId,
   secretAccessKey: awsConfig.awsConfig.secretAcessKey
 });
 
 router.post("/profile_image", auth, upload, (req, res) => {
+  console.log("ID====" + req.user);
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -382,7 +383,6 @@ router.post("/profile_image", auth, upload, (req, res) => {
       profilePic: key
     };
     // console.log(params);
-    console.log(req.user.id);
 
     try {
       let profile = await Profile.findOneAndUpdate(
