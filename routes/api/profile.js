@@ -378,9 +378,11 @@ router.post("/profile_image", auth, upload, (req, res) => {
 
   s3.upload(params, async (error, data) => {
     const { key } = data;
+    const fullKeyUrl = `https://devbookimages.s3.eu-west-2.amazonaws.com/${key}`;
+    console.log(key);
     const profileFields = {
       user: req.user.id,
-      profilePic: key
+      profilePic: fullKeyUrl
     };
     // console.log(params);
 

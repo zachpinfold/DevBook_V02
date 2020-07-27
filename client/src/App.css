@@ -57,6 +57,7 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #02393f;
+
   /* position: relative; */
 }
 
@@ -252,7 +253,7 @@ h4 {
 }
 
 .main-section-2 {
-  width: 760px;
+  width: 880px;
   margin-top: 60px;
 }
 
@@ -493,7 +494,7 @@ select {
 
 .main-section-4 {
   width: 880px;
-  margin-top: 200px;
+  margin-top: 100px;
   margin-bottom: 50px;
   border-radius: 15px;
 }
@@ -511,11 +512,69 @@ select {
   flex: 3;
 }
 
+.profile-image-div {
+  position: relative;
+}
+
+.profile-pic-input {
+  position: absolute;
+  margin-left: 2px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 222px;
+  height: 222px;
+  opacity: 1;
+  transition: 0.5s ease;
+  /* background-color: #008cba; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  font-family: var(--futuraBold);
+  content: "Select profile image";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--blue);
+  /* border: 1px solid #999; */
+  border-radius: 300px;
+  margin-top: 3px;
+  /* padding: 5px 10px; */
+  width: 222px;
+  height: 224px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  opacity: 0;
+  /* text-shadow: 1px 1px #fff; */
+  font-weight: 700;
+  font-size: 12pt;
+  color: white;
+}
+
+.custom-file-input:hover::before {
+  border-color: black;
+  opacity: 0.9;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
 .profile-image {
+  display: block;
   flex: 1;
   border: solid 2px;
   border-radius: 600px;
-  width: 100%;
+  width: 222px;
+  height: 222px;
 }
 
 .profile-name {
@@ -587,6 +646,11 @@ select {
   background-color: var(--blue);
 }
 
+.btn-save-image {
+  margin: 20px;
+  width: 180px;
+}
+
 .repo {
   margin-bottom: 25px;
 
@@ -634,6 +698,26 @@ select {
 
 .repo-copy {
   margin-bottom: 10px;
+}
+
+.cropDiv {
+  z-index: 2;
+  position: fixed;
+  /* display: flex; */
+  /* overflow: none; */
+  /* margin-left: -180px; */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(51, 170, 51, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.crop-image-area {
+  width: 500px;
 }
 
 @media (max-width: 920px) {

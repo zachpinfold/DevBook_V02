@@ -19,6 +19,7 @@ class ImageUpload extends Component {
   }
 
   uploadImage() {
+    console.log(this.state);
     let uploadPromises = this.state.pictures.map(image => {
       let data = new FormData();
       data.append("image", image, image.name);
