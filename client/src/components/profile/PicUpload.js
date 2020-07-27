@@ -11,6 +11,7 @@ class PicUpload extends Component {
   constructor() {
     super();
     this.state = {
+      loading: false,
       src: null,
       crop: {
         unit: "%",
@@ -23,6 +24,8 @@ class PicUpload extends Component {
   }
 
   handleFile = e => {
+    console.log("handle");
+    this.setState({ loading: true });
     const fileReader = new FileReader();
     fileReader.onloadend = () => this.setState({ src: fileReader.result });
     fileReader.readAsDataURL(e.target.files[0]);
@@ -42,6 +45,7 @@ class PicUpload extends Component {
   // ReactCrop component actions and their functions START
   onImageLoaded = image => {
     this.imageRef = image;
+    console.log(this.state.src);
   };
 
   onCropChange = crop => {
@@ -104,7 +108,9 @@ class PicUpload extends Component {
     axios
       .post("/api/profile/profile_image", data, {})
       .then(() => {
-        this.setState({ src: null });
+        // this.setState({ src: null });
+        this.setState({ loading: false });
+
         this.props.getCurrentProfile();
       })
       .catch(e => {
@@ -112,11 +118,16 @@ class PicUpload extends Component {
       });
   };
 
+  toggle = () => {
+    // this.setState({ src: null });
+    this.setState({ loading: false });
+  };
+
   render() {
     const { crop, profile_pic, src } = this.state;
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <label htmlFor='profile_pic'></label>
         <div className='profile-image-div'>
           <img
@@ -125,38 +136,46 @@ class PicUpload extends Component {
             alt='Picture of me'
           />
           <div className='profile-pic-input'>
-            {/* <input
-              type='file'
-              name='uploadfile'
-              id='img'
-              style='display:none;'
-            /> */}
             <input
               type='file'
               name='uploadfile'
               id='img'
               style={{ display: "none" }}
               value={profile_pic}
-              onChange={this.handleFile}
+              onInput={this.handleFile}
+              onkeypress='return event.keyCode != 13;'
+
+              // onInput={console.log("input")}
             />
             <label class='custom-file-input' for='img'></label>
           </div>
         </div>
-        {src && (
+        {/* {this.state.loaded && ( */}
+        {/* )} */}
+        {this.state.loading && (
           <div className='cropDiv'>
             <div className='crop-image-area'>
-              <ReactCrop
-                src={src}
-                crop={crop}
-                onImageLoaded={this.onImageLoaded}
-                onComplete={this.onCropComplete}
-                onChange={this.onCropChange}
-              />
+              <i
+                className='fas fa-times crop-cancel-btn'
+                type='button'
+                onClick={this.toggle}
+                // className='fas fa-times crop-cancel-btn'
+              ></i>
+              <div className='crop-centre'>
+                <h2 style={{ marginBottom: "20px" }}>Crop image</h2>
+                <ReactCrop
+                  src={src}
+                  crop={crop}
+                  onImageLoaded={this.onImageLoaded}
+                  onComplete={this.onCropComplete}
+                  onChange={this.onCropChange}
+                />
+                <button className='btn-CV btn-save-image'>Save Image</button>
+              </div>
             </div>
-            <button className='btn-website btn-save-image'>Save Image</button>
           </div>
         )}
-      </Form>
+      </form>
     );
   }
 }

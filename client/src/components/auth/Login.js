@@ -31,7 +31,7 @@ const Login = ({ login, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <section className='main-section-2'>
+      <section className='main-section-2 login-section'>
         <h2 className='heading'>Login</h2>
         <div className='line-break'></div>
         <form onSubmit={onSubmit} action='' className='form'>

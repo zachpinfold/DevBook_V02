@@ -257,6 +257,10 @@ h4 {
   margin-top: 60px;
 }
 
+.login-section {
+  width: 500px;
+}
+
 .heading {
   font-size: 45px;
   color: white;
@@ -538,7 +542,7 @@ select {
 }
 .custom-file-input::before {
   font-family: var(--futuraBold);
-  content: "Select profile image";
+  content: "Upload profile image";
   display: flex;
   justify-content: center;
   align-items: center;
@@ -558,6 +562,7 @@ select {
   font-weight: 700;
   font-size: 12pt;
   color: white;
+  transition: 0.4s;
 }
 
 .custom-file-input:hover::before {
@@ -649,6 +654,7 @@ select {
 .btn-save-image {
   margin: 20px;
   width: 180px;
+  margin-bottom: 0px;
 }
 
 .repo {
@@ -710,7 +716,7 @@ select {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(51, 170, 51, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -718,7 +724,22 @@ select {
 }
 
 .crop-image-area {
-  width: 500px;
+  padding: 25px 30px 30px 30px;
+  background-color: var(--blue);
+  border-radius: 5px;
+  width: auto;
+  max-width: 450px;
+  text-align: right;
+}
+
+.crop-centre {
+  text-align: center;
+}
+
+.crop-cancel-btn {
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 @media (max-width: 920px) {
@@ -792,6 +813,7 @@ select {
   padding-left: 25px;
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
 }
 
 .dashboard-card {
@@ -843,6 +865,11 @@ select {
   color: white;
 }
 
+a,
+u {
+  text-decoration: none;
+}
+
 p {
   font-family: var(--helveticaMedium);
 }
@@ -858,6 +885,17 @@ p {
 .card-title-link:hover {
   text-decoration: underline;
   color: white;
+}
+
+.btn-edit-profile {
+  font-family: var(--helveticaMedium);
+  color: var(--blue);
+  font-size: 20px;
+}
+
+.btn-edit-profile:hover {
+  text-decoration: underline;
+  color: var(--blue);
 }
 
 @media (max-width: 500px) {

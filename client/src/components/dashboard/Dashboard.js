@@ -1,27 +1,24 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import API from "../../config/config";
 import NewsCard from "../dashboard/NewsCard";
+import { connect } from "react-redux";
+import { getCurrentProfile } from "../../actions/profile";
 
-const Dashboard = props => {
-  // useEffect(() => {
-  //   fetch("https://newsapi.org/v2/everything?q=developer", {
-  //     headers: {
-  //       "X-API-KEY": API.API.news
-  //     }
-  //   })
-  //     .then(response => {
-  //       console.log(response);
-  //       return response.json();
-  //     })
-  //     .then(json => {
-  //       console.log(json.articles[0]);
-  //     });
-  // }, []);
+const Dashboard = ({ isAuthenticated, getCurrentProfile, profile }) => {
+  // console.log(profile.loading);
 
-  return (
+  useEffect(() => {
+    getCurrentProfile();
+    console.log(profile.profile);
+  }, [getCurrentProfile]);
+
+  return profile.loading ? (
+    <div>Hello</div>
+  ) : (
     <section class='main-section-2'>
+      {profile.profile === null && <Redirect to='create-profile' />}
       <h2 class='heading'>Contol Centre</h2>
       <div class='line-break'></div>
       <div class='dashboard'>
@@ -31,15 +28,29 @@ const Dashboard = props => {
         </div>
         <div class='dashboard-right'>
           <a class='dash-name'>Zach Pinfold</a>
-          <a class='dash-link'>View Profile</a>
-          <Link to='/create-profile'>Edit Profile</Link>
-          <Link to='/profile-me'>Edit Profile</Link>
+          <Link to='/edit-profile'>
+            <a style={{ marginTop: "10px" }} className='btn-edit-profile'>
+              Edit Profile
+            </a>
+          </Link>
+          <Link to='/profile-me'>
+            <a style={{ marginTop: "10px" }} className='btn-edit-profile'>
+              View Profile
+            </a>
+          </Link>
         </div>
       </div>
     </section>
   );
 };
 
-Dashboard.propTypes = {};
+Dashboard.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired
+};
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  profile: state.profile
+});
+
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
