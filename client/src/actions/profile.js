@@ -8,7 +8,8 @@ import {
   UPDATE_PROFILE,
   CLEAR_PROFILE,
   DELETE_ACCOUNT,
-  GET_REPOS
+  GET_REPOS,
+  GET_EXPERIENCES
 } from "./types";
 
 // Get current user's profile
@@ -18,6 +19,24 @@ export const getCurrentProfile = () => async dispatch => {
     const res = await axios.get("/api/profile/me");
     dispatch({
       type: GET_PROFILE,
+      payload: res.data
+    });
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Get current user's experiences
+
+export const getCurrentProfileExperience = () => async dispatch => {
+  try {
+    const res = await axios.get("/api/profile/me/experiences");
+    dispatch({
+      type: GET_EXPERIENCES,
       payload: res.data
     });
   } catch (err) {
@@ -110,7 +129,7 @@ export const createProfile = (
     dispatch(setAlert(edit ? "Profile Updated" : "Profile Created", "success"));
 
     if (!edit) {
-      history.push("/dashboard");
+      history.push("/profile-me");
     }
   } catch (err) {
     const errors = err.response.data.errors;
@@ -147,7 +166,7 @@ export const addExperience = (formData, history) => async dispatch => {
 
     dispatch(setAlert("Experience Added", "success"));
 
-    history.push("/dashboard");
+    // history.push("/dashboard");
   } catch (err) {
     const errors = err.response.data.errors;
 

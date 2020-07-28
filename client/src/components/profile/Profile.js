@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import LeftProfile from "./LeftProfile";
 import RightProfile from "./RightProfile";
+import CreateProfileLink from "./CreateProfileLink";
+
+const MODAL_OPEN_CLASS = "body--modal-open";
 
 const Profile = ({
   getCurrentProfile,
@@ -13,23 +16,22 @@ const Profile = ({
 }) => {
   useEffect(() => {
     getCurrentProfile();
+    const body = document.querySelector("#root");
+
+    body.scrollIntoView(
+      {
+        behavior: "smooth"
+      },
+      500
+    );
   }, [getCurrentProfile]);
 
-  // const {
-  // status,
-  // skills,
-  // bio,
-  //   experiences,
-  //   education,
-  //   user,
-  //   location,
-  //   website
-  // } = profile;
-
-  return (
+  return loading ? (
+    <div>Hello</div>
+  ) : (
     <Fragment>
-      {profile === null || loading ? (
-        <div>Loading</div>
+      {profile === null ? (
+        <CreateProfileLink />
       ) : (
         <Fragment>
           <section className='main-section-4'>
@@ -44,7 +46,10 @@ const Profile = ({
   );
 };
 
-Profile.propTypes = {};
+Profile.propTypes = {
+  profile: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
+};
 
 const mapStateToProps = state => ({
   profile: state.profile,

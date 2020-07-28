@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import { Landing } from "./components/layout/Landing";
+import Landing from "./components/layout/Landing";
 import Navbar from "./components/layout/Navbar";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
@@ -35,7 +35,7 @@ const App = () => {
             <Switch>
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
-              <Route exact path='/profile-me' component={Profile} />
+              <PrivateRoute exact path='/profile-me' component={Profile} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               <PrivateRoute
                 exact

@@ -9,6 +9,7 @@ const { v4: uuidv4 } = require("uuid");
 const AWS = require("aws-sdk");
 const multer = require("multer");
 const awsConfig = require("../../config/AWS");
+const ObjectID = require("mongodb").ObjectID;
 
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
@@ -22,10 +23,62 @@ router.get("/me", auth, async (req, res) => {
     const profile = await Profile.findOne({
       user: req.user.id
     }).populate("user", ["name", "avatar"]);
+
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
     res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   GET SORTED api/profile/me/experiences
+// @desc    Get current user's profile
+// @access  Private
+router.get("/me/experiences", auth, async (req, res) => {
+  try {
+    var userid = await new ObjectID("5f2011a8e12242d4ffce901d");
+
+    console.log(userid);
+
+    const profile = await Profile.aggregate([
+      // Initial document match (uses index, if a suitable one is available)
+      {
+        $match: {
+          _id: userid
+        }
+      },
+      { $unwind: "$experiences" },
+      {
+        $sort: {
+          "experiences.to": -1
+        }
+      }
+    ]);
+
+    const currentExp = [];
+
+    const sortedArray = await profile.map(exp => {
+      if (exp.experiences.current === true) currentExp.push(exp.experiences);
+      return exp.experiences;
+    });
+
+    // console.log(sortedArray);
+
+    if (!profile) {
+      return res.status(400).json({ msg: "There is no profile for this user" });
+    }
+    if (currentExp.length === 0) {
+      res.json(sortedArray);
+    }
+    if (currentExp.length > 0) {
+      sortedArray.pop();
+      sortedArray.unshift(currentExp[0]);
+      console.log();
+      res.json(sortedArray);
+    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

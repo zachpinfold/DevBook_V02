@@ -38,6 +38,11 @@
   margin: 0px;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 /* ALERTS */
 
 .alert {
@@ -52,6 +57,10 @@
   background-color: var(--orange);
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   /* display: flex; */
   align-items: center;
@@ -59,6 +68,10 @@ body {
   background-color: #02393f;
 
   /* position: relative; */
+}
+
+.modal-open {
+  overflow: hidden;
 }
 
 .main-centre {
@@ -70,6 +83,7 @@ body {
 }
 
 body::after {
+  overflow: auto;
   content: "";
   top: 0;
   left: 0;
@@ -419,6 +433,15 @@ select {
   margin-top: 0px;
 }
 
+.btn-centre-div {
+  width: 400px;
+  text-align: center;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .avatar-profile {
   height: 200px;
   width: 200px;
@@ -518,6 +541,36 @@ select {
 
 .profile-image-div {
   position: relative;
+}
+
+.btn-a {
+  font-size: 22px;
+  font-family: var(--helveticaMedium);
+  color: var(--blue);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn-a-small {
+  font-size: 16px;
+  font-family: var(--helveticaMedium);
+  color: var(--blue);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn-a-back {
+  font-size: 16px;
+  font-family: var(--helveticaMedium);
+  color: white;
+  margin-left: 20px;
+  /* text-decoration: underline; */
+  cursor: pointer;
+}
+
+.btn-a-small:hover,
+.btn-a:hover {
+  color: white;
 }
 
 .profile-pic-input {
@@ -668,17 +721,18 @@ select {
 }
 
 .profile-sub {
-  margin-top: 30px;
+  margin-top: 40px;
+  font-size: 18px;
   font-family: var(--futuraBold);
   color: var(--orange);
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 
 .profile-copy {
   font-family: var(--helveticaLight);
   letter-spacing: 1.1px;
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 30px;
 }
 
@@ -808,6 +862,13 @@ select {
   flex: 4;
 }
 
+.dash-profile-create {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .dashboard-right {
   flex: 1;
   padding-left: 25px;
@@ -898,7 +959,40 @@ p {
   color: var(--blue);
 }
 
+.cropAddExp {
+  z-index: 2;
+  position: fixed;
+  /* display: flex; */
+  /* overflow: none; */
+  /* margin-left: -180px; */
+  overflow-y: scroll;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 920px) {
+  .exp-form {
+    padding-top: 200px;
+    padding-bottom: -200px;
+    overflow-y: scroll;
+  }
+}
+
 @media (max-width: 500px) {
+  .exp-form {
+    padding-top: 200px;
+    padding-bottom: -200px;
+    overflow-y: scroll;
+    /* margin-bottom: 50px; */
+    /* height: 100%; */
+  }
   .dashboard {
     flex-direction: column;
   }

@@ -133,7 +133,15 @@ const CreateProfile = ({ createProfile, history }) => {
                   />
                 </div>
               </div>
-
+              {/* <Link to='/profile-me'>
+                <button
+                  type='submit'
+                  style={{ marginTop: "10px" }}
+                  className='btn-primary btn-create btn-hid'
+                >
+                  Submit
+                </button>
+              </Link> */}
               <input type='submit' className='btn-primary btn-create btn-hid' />
             </form>
           </div>
