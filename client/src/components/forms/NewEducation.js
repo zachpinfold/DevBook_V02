@@ -2,13 +2,13 @@ import React, { Fragment, useState } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addExperience } from "../../actions/profile";
+import { addEducation } from "../../actions/profile";
 
-const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
+const NewEducation = ({ addEducation, history, toggleShowEduForm }) => {
   const [formData, setFormData] = useState({
-    company: "",
-    title: "",
-    location: "",
+    school: "",
+    degree: "",
+    fieldofstudy: "",
     from: "",
     to: "",
     current: false,
@@ -17,7 +17,15 @@ const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
 
   const [toDateDisabled, toggleDisabled] = useState(false);
 
-  const { company, title, location, from, to, current, description } = formData;
+  const {
+    school,
+    degree,
+    from,
+    to,
+    fieldofstudy,
+    description,
+    current
+  } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,15 +37,15 @@ const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
             class='form'
             onSubmit={e => {
               e.preventDefault();
-              addExperience(formData);
-              toggleShowExpForm("hide");
+              addEducation(formData);
+              toggleShowEduForm("hide");
             }}
           >
             <div className='exp-top'>
               <button
                 type='button'
                 className='btn-no-back'
-                onClick={() => toggleShowExpForm("hide")}
+                onClick={() => toggleShowEduForm("hide")}
               >
                 <i className='fas fa-times exp-hide'></i>
               </button>
@@ -47,21 +55,21 @@ const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
             </div>
             <div className='form-group exp-form'>
               <div className='input-half'>
-                <h4 className='form-headings'>*Job Title</h4>
+                <h4 className='form-headings'>* School or bootcamp</h4>
                 <input
                   type='text'
-                  name='title'
-                  value={title}
+                  name='school'
+                  value={school}
                   onChange={e => onChange(e)}
                   required
                 />
               </div>
               <div className='input-half-right'>
-                <h4 className='form-headings'>*Company</h4>
+                <h4 className='form-headings'>* Degree or Certificate</h4>
                 <input
                   type='text'
-                  name='company'
-                  value={company}
+                  name='degree'
+                  value={degree}
                   onChange={e => onChange(e)}
                   required
                 />
@@ -69,20 +77,19 @@ const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
             </div>
             <div className='form-group'>
               <div className='input-regular'>
-                <h4 className='form-headings'>Location</h4>
+                <h4 className='form-headings'>Field of Study</h4>
 
                 <input
                   type='text'
-                  placeholder='Location'
-                  value={location}
+                  value={fieldofstudy}
                   onChange={e => onChange(e)}
-                  name='location'
+                  name='fieldofstudy'
                 />
               </div>
             </div>
             <div className='form-group'>
               <div className='input-half'>
-                <h4 className='form-headings'>*First Name</h4>
+                <h4 className='form-headings'>*From</h4>
                 <input
                   type='date'
                   name='from'
@@ -91,7 +98,7 @@ const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
                 />
               </div>
               <div className='input-half-right'>
-                <h4 className='form-headings'>*Last Name</h4>
+                <h4 className='form-headings'>*To</h4>
                 <input
                   type='date'
                   name='to'
@@ -129,7 +136,7 @@ const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
               ></textarea>
             </div>
             <input type='submit' class='btn btn-primary my-1' />
-            <a class='btn-a-back' onClick={() => toggleShowExpForm("hide")}>
+            <a class='btn-a-back' onClick={() => toggleShowEduForm("hide")}>
               Go Back
             </a>
           </form>
@@ -139,9 +146,9 @@ const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
   );
 };
 
-NewExperience.propTypes = {
-  addExperience: PropTypes.func.isRequired,
-  toggleShowForm: PropTypes.func.isRequired
+NewEducation.propTypes = {
+  addEducation: PropTypes.func.isRequired,
+  toggleShowEduForm: PropTypes.func.isRequired
 };
 
-export default connect(null, { addExperience })(withRouter(NewExperience));
+export default connect(null, { addEducation })(withRouter(NewEducation));

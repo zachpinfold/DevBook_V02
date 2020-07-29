@@ -1,9 +1,11 @@
 import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ProfileExperiences from "./ProfileExperiences";
+import ProfileEducation from "./ProfileEducation";
 import NewExperience from "../forms/NewExperience";
 import { connect } from "react-redux";
 import { getCurrentProfileExperience } from "../../actions/profile";
+import NewEducation from "../forms/NewEducation";
 
 const MODAL_OPEN_CLASS = "modal-open";
 
@@ -13,10 +15,11 @@ const RightProfile = ({
   profile: { profile },
   experiences
 }) => {
-  const [showForm, toggleShowExp] = useState(false);
+  const [showExpForm, toggleShowExp] = useState(false);
+  const [showEduForm, toggleShowEdu] = useState(false);
   // const { status, skills, bio } = profile;
 
-  const toggleShowForm = hide => {
+  const toggleShowExpForm = hide => {
     document.body.classList.add(MODAL_OPEN_CLASS);
     toggleShowExp(true);
     if (hide === "hide") {
@@ -25,11 +28,38 @@ const RightProfile = ({
     }
   };
 
+  const toggleShowEduForm = hide => {
+    document.body.classList.add(MODAL_OPEN_CLASS);
+    toggleShowEdu(true);
+    if (hide === "hide") {
+      document.body.classList.remove(MODAL_OPEN_CLASS);
+      toggleShowEdu(!true);
+    }
+  };
+
   useEffect(() => {
     getCurrentProfileExperience();
   }, [getCurrentProfileExperience]);
 
-  console.log(experiences);
+  const currentEdu = [];
+
+  const sort = profile.education.sort(
+    (a, b) => new Date(b.to) - new Date(a.to)
+  );
+
+  const sortedArray = sort.map(edu => {
+    if (edu.current === true) currentEdu.push(edu);
+    return edu;
+  });
+
+  if (currentEdu.length > 0) {
+    sortedArray.pop();
+    sortedArray.unshift(currentEdu[0]);
+  }
+
+  console.log(sortedArray);
+
+  // console.log(currentEdu);
 
   return (
     <Fragment>
@@ -50,25 +80,35 @@ const RightProfile = ({
           {
             <a
               className={experiences.length > 0 ? "btn-a-small" : "btn-a"}
-              onClick={toggleShowForm}
+              onClick={toggleShowExpForm}
             >
               Add work experience..
             </a>
           }
-          {showForm && <NewExperience toggleShowForm={toggleShowForm} />}
+          {showExpForm && (
+            <NewExperience toggleShowExpForm={toggleShowExpForm} />
+          )}
 
           <h3 className='profile-sub'>Education</h3>
-          {/* {profile.education.length > 0 ? (
+
+          {profile.education.length > 0 && (
             <Fragment>
-              {profile.education.map(edu => (
-              <ProfileEducation key={edu._id} education={edu} />
-            ))}
+              {sortedArray.map(edu => (
+                <ProfileEducation key={edu._id} education={edu} />
+              ))}
             </Fragment>
-          ) : (
-            <a className='btn-a' href='profile.html'>
-              Add some education..
+          )}
+          {
+            <a
+              className={profile.education.length > 0 ? "btn-a-small" : "btn-a"}
+              onClick={toggleShowEduForm}
+            >
+              Add work experience..
             </a>
-          )} */}
+          }
+          {showEduForm && (
+            <NewEducation toggleShowEduForm={toggleShowEduForm} />
+          )}
 
           <h3 className='profile-sub'>GitHub Repos</h3>
           <h4 className='experience-company repo-title'>Repo1</h4>

@@ -2,25 +2,31 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
 import { connect } from "react-redux";
-import { deleteExperience } from "../../actions/profile";
+import { deleteEducation } from "../../actions/profile";
 
-const ProfileExperiences = ({
-  experience: { company, title, location, current, to, from, description, _id },
-  deleteExperience
+const ProfileEducation = ({
+  deleteEducation,
+
+  education: {
+    school,
+    degree,
+    fieldofstudy,
+    from,
+    to,
+    description,
+    current,
+    _id
+  }
 }) => {
-  // console.log(company);
-
   return (
     <Fragment>
       <div>
         <div className='exp-top-div'>
-          <h4 className='experience-company'>
-            {company} - {title}
-          </h4>
+          <h4 className='experience-company'>{school}</h4>
           <button
             className='btn-no-back'
             onClick={() => {
-              deleteExperience(_id);
+              deleteEducation(_id);
             }}
           >
             <i className='fas fa-times exp-del'></i>
@@ -37,10 +43,10 @@ const ProfileExperiences = ({
   );
 };
 
-ProfileExperiences.propTypes = {
+ProfileEducation.propTypes = {
   edu: PropTypes.array.isRequired,
   experience: PropTypes.object.isRequired,
-  deleteExperience: PropTypes.func.isRequired
+  deleteEducation: PropTypes.func.isRequired
 };
 
-export default connect(null, { deleteExperience })(ProfileExperiences);
+export default connect(null, { deleteEducation })(ProfileEducation);
