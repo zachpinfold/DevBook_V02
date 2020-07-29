@@ -9,7 +9,8 @@ import {
   CLEAR_PROFILE,
   DELETE_ACCOUNT,
   GET_REPOS,
-  GET_EXPERIENCES
+  GET_EXPERIENCES,
+  UPDATE_EXPERIENCES
 } from "./types";
 
 // Get current user's profile
@@ -159,9 +160,16 @@ export const addExperience = (formData, history) => async dispatch => {
 
     const res = await axios.put("/api/profile/experience", formData, config);
 
+    console.log();
+
     dispatch({
       type: UPDATE_PROFILE,
       payload: res.data
+    });
+
+    dispatch({
+      type: UPDATE_EXPERIENCES,
+      payload: res.data.experiences
     });
 
     dispatch(setAlert("Experience Added", "success"));
@@ -229,6 +237,11 @@ export const deleteExperience = id => async dispatch => {
     dispatch({
       type: UPDATE_PROFILE,
       payload: res.data
+    });
+
+    dispatch({
+      type: UPDATE_EXPERIENCES,
+      payload: res.data.experiences
     });
 
     dispatch(setAlert("Experiece removed", "success"));

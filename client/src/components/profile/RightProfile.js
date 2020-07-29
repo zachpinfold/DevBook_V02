@@ -10,7 +10,8 @@ const MODAL_OPEN_CLASS = "modal-open";
 const RightProfile = ({
   // profile,
   getCurrentProfileExperience,
-  profile: { profile, experiences }
+  profile: { profile },
+  experiences
 }) => {
   const [showForm, toggleShowExp] = useState(false);
   // const { status, skills, bio } = profile;
@@ -28,7 +29,7 @@ const RightProfile = ({
     getCurrentProfileExperience();
   }, [getCurrentProfileExperience]);
 
-  console.log(profile);
+  console.log(experiences);
 
   return (
     <Fragment>
@@ -51,7 +52,7 @@ const RightProfile = ({
               className={experiences.length > 0 ? "btn-a-small" : "btn-a"}
               onClick={toggleShowForm}
             >
-              Add some work experience..
+              Add work experience..
             </a>
           }
           {showForm && <NewExperience toggleShowForm={toggleShowForm} />}
@@ -100,7 +101,8 @@ RightProfile.propTypes = {
 };
 
 const MSTP = state => ({
-  profile: state.profile
+  profile: state.profile,
+  experiences: state.profile.experiences
 });
 
 export default connect(MSTP, { getCurrentProfileExperience })(RightProfile);

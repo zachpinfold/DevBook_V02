@@ -25,7 +25,6 @@ const NewExperience = ({ addExperience, history, toggleShowForm }) => {
     <div>
       <Fragment>
         <div className='cropAddExp'>
-          <h2 class='large text-primary'>Add An Experience</h2>
           <form
             class='form'
             onSubmit={e => {
@@ -34,12 +33,23 @@ const NewExperience = ({ addExperience, history, toggleShowForm }) => {
               toggleShowForm("hide");
             }}
           >
+            <div className='exp-top'>
+              <button
+                type='button'
+                className='btn-no-back'
+                onClick={() => toggleShowForm("hide")}
+              >
+                <i className='fas fa-times exp-hide'></i>
+              </button>
+            </div>
+            <div className='title-centre'>
+              <h2 class='large text-primary'>Add An Experience</h2>
+            </div>
             <div className='form-group exp-form'>
               <div className='input-half'>
-                <h4 className='form-headings'>*First Name</h4>
+                <h4 className='form-headings'>*Job Title</h4>
                 <input
                   type='text'
-                  placeholder='* Job Title'
                   name='title'
                   value={title}
                   onChange={e => onChange(e)}
@@ -47,10 +57,9 @@ const NewExperience = ({ addExperience, history, toggleShowForm }) => {
                 />
               </div>
               <div className='input-half-right'>
-                <h4 className='form-headings'>*Last Name</h4>
+                <h4 className='form-headings'>*Company</h4>
                 <input
                   type='text'
-                  placeholder='* Company'
                   name='company'
                   value={company}
                   onChange={e => onChange(e)}
@@ -58,14 +67,18 @@ const NewExperience = ({ addExperience, history, toggleShowForm }) => {
                 />
               </div>
             </div>
-            <div class='form-group'>
-              <input
-                type='text'
-                placeholder='Location'
-                value={location}
-                onChange={e => onChange(e)}
-                name='location'
-              />
+            <div className='form-group'>
+              <div className='input-regular'>
+                <h4 className='form-headings'>Location</h4>
+
+                <input
+                  type='text'
+                  placeholder='Location'
+                  value={location}
+                  onChange={e => onChange(e)}
+                  name='location'
+                />
+              </div>
             </div>
             <div className='form-group'>
               <div className='input-half'>
@@ -89,7 +102,7 @@ const NewExperience = ({ addExperience, history, toggleShowForm }) => {
               </div>
             </div>
             <div class='form-group'>
-              <p>
+              <p style={{ color: "white" }}>
                 <input
                   type='checkbox'
                   name='current'
@@ -106,6 +119,7 @@ const NewExperience = ({ addExperience, history, toggleShowForm }) => {
 
             <div class='form-group'>
               <textarea
+                style={{ height: "100px" }}
                 name='description'
                 cols='30'
                 rows='5'

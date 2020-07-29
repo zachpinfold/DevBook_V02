@@ -5,7 +5,8 @@ import {
   UPDATE_PROFILE,
   GET_PROFILES,
   GET_REPOS,
-  GET_EXPERIENCES
+  GET_EXPERIENCES,
+  UPDATE_EXPERIENCES
 } from "../actions/types";
 
 const initialState = {
@@ -25,6 +26,7 @@ export default function (state = initialState, action) {
     case UPDATE_PROFILE:
     case GET_PROFILE:
       return { ...state, profile: payload, loading: false };
+    case UPDATE_EXPERIENCES:
     case GET_EXPERIENCES:
       return { ...state, experiences: payload, loading: false };
     case GET_PROFILES:

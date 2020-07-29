@@ -294,7 +294,7 @@ h4 {
 }
 
 .form .form-group {
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .form .form-text {
@@ -732,7 +732,7 @@ select {
   font-family: var(--helveticaLight);
   letter-spacing: 1.1px;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 30px;
 }
 
@@ -964,7 +964,7 @@ p {
   position: fixed;
   /* display: flex; */
   /* overflow: none; */
-  /* margin-left: -180px; */
+  /* padding-top: 180px; */
   overflow-y: scroll;
   top: 0;
   left: 0;
@@ -977,10 +977,56 @@ p {
   align-items: center;
 }
 
+.exp-top-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.exp-del {
+  color: var(--orange);
+  font-size: 20px;
+  opacity: 0.6;
+}
+
+.exp-del:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.btn-no-back {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.exp-hide {
+  color: white;
+  font-size: 20px;
+  opacity: 1;
+}
+
+.exp-top {
+  width: 100%;
+  text-align: right;
+}
+
+.title-centre {
+  text-align: center;
+}
+
+.exp-hide:hover {
+  opacity: 1;
+  cursor: pointer;
+}
 @media (max-width: 920px) {
-  .exp-form {
-    padding-top: 200px;
-    padding-bottom: -200px;
+  .cropAddExp {
+    /* height: 2000px; */
+    /* padding-top: 200px; */
+    /* padding-bottom: -200px; */
     overflow-y: scroll;
   }
 }

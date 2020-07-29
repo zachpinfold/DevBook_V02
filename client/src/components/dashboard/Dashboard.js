@@ -16,7 +16,7 @@ const Dashboard = ({ isAuthenticated, getCurrentProfile, profile }) => {
     console.log(profile.profile);
   }, [getCurrentProfile]);
 
-  return profile.loading ? (
+  return profile.profile && profile.loading ? (
     <div>Hello</div>
   ) : (
     <Fragment>
