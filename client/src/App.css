@@ -57,6 +57,11 @@ body {
   background-color: var(--orange);
 }
 
+.alert-success {
+  background-color: var(--orange);
+  margin-bottom: 30px;
+}
+
 html {
   overflow-y: scroll;
 }
@@ -132,6 +137,12 @@ h4 {
   background-color: var(--blue);
 }
 
+.line-break-red {
+  height: 1px;
+  margin-bottom: 15px;
+  background-color: var(--orange);
+}
+
 /* NavBar  */
 
 .navbar {
@@ -156,6 +167,7 @@ h4 {
   font-family: var(--futuraBold);
   margin-right: 20px;
   list-style-type: none;
+  align-items: center;
 }
 
 .navbar a {
@@ -164,6 +176,41 @@ h4 {
   text-decoration: none;
 }
 
+.navbar-image-div {
+  position: relative;
+  width: 50%;
+}
+
+.nav-profile-image {
+  display: block;
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
+  margin-right: 15px;
+}
+
+.profile-image-nav-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
+  margin-right: 15px;
+  background-color: var(--orange);
+  opacity: 0;
+  transition: 0.5s ease;
+}
+
+.profile-image-nav-overlay:hover {
+  opacity: 0.7;
+}
+
+.nav-profile-image:hover {
+  color: var(--blue);
+}
 /* Homepage */
 
 .main-section {
@@ -721,11 +768,11 @@ select {
 }
 
 .profile-sub {
-  margin-top: 40px;
+  margin-top: 50px;
   font-size: 18px;
   font-family: var(--futuraBold);
   color: var(--orange);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .profile-copy {
@@ -1055,4 +1102,63 @@ p {
 
     display: block;
   }
+}
+
+/* PROFILES */
+
+.profiles {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.left-profiles {
+  flex: 1;
+}
+
+.right-profiles {
+  flex: 3;
+  padding-left: 50px;
+}
+
+.profile-copy-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profiles-name {
+  font-size: 32px;
+  color: var(--orange);
+}
+
+.profiles-status {
+  font-size: 16px;
+}
+
+.opacity {
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+.profiles-copy {
+  font-family: var(--helveticaLight);
+  letter-spacing: 1.1px;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.profiles-link:hover {
+  text-decoration: underline;
+}
+
+.profile-images {
+  display: block;
+  flex: 1;
+  border-radius: 600px;
+  width: 222px;
+  height: 222px;
 }

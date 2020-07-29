@@ -6,6 +6,8 @@ import NewExperience from "../forms/NewExperience";
 import { connect } from "react-redux";
 import { getCurrentProfileExperience } from "../../actions/profile";
 import NewEducation from "../forms/NewEducation";
+import sortEduArray from "../../utils/sortEdu";
+import GitHub from "./GitHub";
 
 const MODAL_OPEN_CLASS = "modal-open";
 
@@ -41,45 +43,34 @@ const RightProfile = ({
     getCurrentProfileExperience();
   }, [getCurrentProfileExperience]);
 
-  const currentEdu = [];
-
-  const sort = profile.education.sort(
-    (a, b) => new Date(b.to) - new Date(a.to)
-  );
-
-  const sortedArray = sort.map(edu => {
-    if (edu.current === true) currentEdu.push(edu);
-    return edu;
-  });
-
-  if (currentEdu.length > 0) {
-    sortedArray.pop();
-    sortedArray.unshift(currentEdu[0]);
-  }
-
-  console.log(sortedArray);
-
-  // console.log(currentEdu);
+  const sortedExp = sortEduArray(profile.experiences);
+  const sortedArray = sortEduArray(profile.education);
 
   return (
     <Fragment>
       <div className='right-profile-div'>
         <div className='profile-right-info'>
           <h2 className='heading profile-H'>{profile.status}</h2>
-          <p className='profile-copy'>{profile.skills}</p>
-          <h3 className='profile-sub'>About me</h3>
+          <p className='profile-copy'>{profile.skills.join(" / ")}</p>
+          <h3 style={{ marginTop: "10px" }} className='profile-sub'>
+            About me
+          </h3>
+          <div class='line-break-red'></div>
+
           <p className='profile-copy'>{profile.bio}</p>
           <h3 className='profile-sub'>Work Experience</h3>
-          {experiences.length > 0 && (
+          <div class='line-break-red'></div>
+
+          {sortedExp.length > 0 && (
             <Fragment>
-              {experiences.map(exp => (
+              {sortedExp.map(exp => (
                 <ProfileExperiences key={exp._id} experience={exp} />
               ))}
             </Fragment>
           )}
           {
             <a
-              className={experiences.length > 0 ? "btn-a-small" : "btn-a"}
+              className={sortedExp.length > 0 ? "btn-a-small" : "btn-a"}
               onClick={toggleShowExpForm}
             >
               Add work experience..
@@ -90,8 +81,9 @@ const RightProfile = ({
           )}
 
           <h3 className='profile-sub'>Education</h3>
+          <div class='line-break-red'></div>
 
-          {profile.education.length > 0 && (
+          {sortedArray.length > 0 && (
             <Fragment>
               {sortedArray.map(edu => (
                 <ProfileEducation key={edu._id} education={edu} />
@@ -100,10 +92,10 @@ const RightProfile = ({
           )}
           {
             <a
-              className={profile.education.length > 0 ? "btn-a-small" : "btn-a"}
+              className={sortedArray.length > 0 ? "btn-a-small" : "btn-a"}
               onClick={toggleShowEduForm}
             >
-              Add work experience..
+              Add education..
             </a>
           }
           {showEduForm && (
@@ -111,24 +103,10 @@ const RightProfile = ({
           )}
 
           <h3 className='profile-sub'>GitHub Repos</h3>
-          <h4 className='experience-company repo-title'>Repo1</h4>
-          <p className='experience-time'>Last updated - Jan 2018</p>
-          <p className='profile-copy repo-copy'>
-            quidebi tatenienim dolupta quam eribus denimagni volorrumque
-            invelesedia quam quodipsumqui repudi optur maio.
-          </p>
-          <a href='' className='btn-CV repo'>
-            View Repo
-          </a>
-          <h4 className='experience-company repo-title'>Repo2</h4>
-          <p className='experience-time'>Last updated - Jan 2018</p>
-          <p className='profile-copy repo-copy'>
-            quidebi tatenienim dolupta quam eribus denimagni volorrumque
-            invelesedia quam quodipsumqui repudi optur maio.
-          </p>
-          <a href='' className='btn-CV repo'>
-            View Repo
-          </a>
+          <div class='line-break-red'></div>
+          {profile.githubusername && (
+            <GitHub username={profile.githubusername} />
+          )}
         </div>
       </div>
     </Fragment>

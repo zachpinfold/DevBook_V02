@@ -21,6 +21,9 @@ const ProfileSchema = new mongoose.Schema({
     type: [String],
     required: true
   },
+  website: {
+    type: String
+  },
   bio: {
     type: String
   },

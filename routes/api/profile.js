@@ -76,7 +76,6 @@ router.get("/me/experiences", auth, async (req, res) => {
     if (currentExp.length > 0) {
       sortedArray.pop();
       sortedArray.unshift(currentExp[0]);
-      console.log();
       res.json(sortedArray);
     }
   } catch (err) {

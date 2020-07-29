@@ -6,13 +6,14 @@ import { getCurrentProfile } from "../../actions/profile";
 import LeftProfile from "./LeftProfile";
 import RightProfile from "./RightProfile";
 import CreateProfileLink from "./CreateProfileLink";
+import Alert from "../layout/Alert";
 
 const MODAL_OPEN_CLASS = "body--modal-open";
 
 const Profile = ({
   getCurrentProfile,
   profile: { profile, loading },
-  auth
+  auth: { user }
 }) => {
   useEffect(() => {
     getCurrentProfile();
@@ -35,8 +36,9 @@ const Profile = ({
       ) : (
         <Fragment>
           <section className='main-section-4'>
+            <Alert />
             <div className='profile-div'>
-              <LeftProfile profile={profile} />
+              <LeftProfile user={user} profile={profile} />
               <RightProfile profile={profile} />
             </div>
           </section>

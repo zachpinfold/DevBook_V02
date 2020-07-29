@@ -31,7 +31,7 @@ const ProfileExperiences = ({
           {to === null ? " Now" : <Moment format='MMM YYYY'>{to}</Moment>}
         </p>
         <p className='profile-copy'>{description}</p>
-        <div class='line-break'></div>
+        {/* <div class='line-break'></div> */}
       </div>
     </Fragment>
   );

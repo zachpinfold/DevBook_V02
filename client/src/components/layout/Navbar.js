@@ -4,22 +4,37 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ profile, auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
       <li>
-        <a onClick={logout} to='/register'>
+        <a style={{ cursor: "pointer" }} onClick={logout} to='/register'>
           Logout
         </a>
       </li>
+      <li>
+        <Link to='/profiles'>Profiles</Link>
+      </li>
+      {profile.profile && (
+        <Link to='/profile-me'>
+          <div className='navbar-image-div'>
+            <img
+              className='nav-profile-image'
+              src={profile.profile.profilePic}
+              alt=''
+            />
+            <div className='profile-image-nav-overlay'></div>
+          </div>
+        </Link>
+      )}
     </ul>
   );
 
   const guestLinks = (
     <ul>
-      {/* <li>
-        <a href='profiles.html'>Developers</a>
-      </li> */}
+      <li>
+        <Link to='/profiles'>Profiles</Link>
+      </li>
       <li>
         <Link to='/register'>Register</Link>
       </li>
@@ -53,11 +68,13 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 Navbar.prototype = {
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);
