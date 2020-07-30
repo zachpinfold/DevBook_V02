@@ -6,7 +6,8 @@ import { deleteEducation } from "../../actions/profile";
 
 const ProfileEducation = ({
   deleteEducation,
-
+  auth,
+  profile,
   education: {
     school,
     degree,
@@ -23,21 +24,24 @@ const ProfileEducation = ({
       <div>
         <div className='exp-top-div'>
           <h4 className='experience-company'>{school}</h4>
-          <button
-            className='btn-no-back'
-            onClick={() => {
-              deleteEducation(_id);
-            }}
-          >
-            <i className='fas fa-times exp-del'></i>
-          </button>
+          {!auth.loading &&
+            auth.user &&
+            profile.profile.user._id === auth.user._id && (
+              <button
+                className='btn-no-back'
+                onClick={() => {
+                  deleteEducation(_id);
+                }}
+              >
+                <i className='fas fa-times exp-del'></i>
+              </button>
+            )}
         </div>
         <p className='experience-time'>
           <Moment format='MMM YYYY'>{from}</Moment> -{" "}
           {to === null ? " Now" : <Moment format='MMM YYYY'>{to}</Moment>}
         </p>
         <p className='profile-copy'>{description}</p>
-        <div class='line-break'></div>
       </div>
     </Fragment>
   );
@@ -49,4 +53,9 @@ ProfileEducation.propTypes = {
   deleteEducation: PropTypes.func.isRequired
 };
 
-export default connect(null, { deleteEducation })(ProfileEducation);
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile
+});
+
+export default connect(mapStateToProps, { deleteEducation })(ProfileEducation);

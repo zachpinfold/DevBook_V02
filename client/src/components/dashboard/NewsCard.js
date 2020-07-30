@@ -18,14 +18,6 @@ const NewsCard = ({ getNews, news: { loading, news } }) => {
         </a>
         <h4 class='news-top-from'>{news.source.name}</h4>
         <p className='dash-description'>{news.description}</p>
-        {/* <a
-          href={news.url}
-          target='_blank'
-          style={{ marginTop: "20px" }}
-          className='btn-primary btn-secondary'
-        >
-          Read More
-        </a> */}
       </div>
     </Fragment>
   );

@@ -40,7 +40,7 @@ const Profile = ({
           <Alert />
           <div className='profile-div'>
             <LeftProfile user={user} profile={profile} />
-            <RightProfile profile={profile} />
+            <RightProfile user={user} profile={profile} />
           </div>
         </section>
       )}

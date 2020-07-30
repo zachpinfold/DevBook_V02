@@ -18,6 +18,11 @@ const Navbar = ({
   const authLinks = (
     <ul>
       <li>
+        <Link style={{ cursor: "pointer" }} to='/posts'>
+          Posts
+        </Link>
+      </li>
+      <li>
         <Link style={{ cursor: "pointer" }} onClick={logout} to='/login'>
           Logout
         </Link>

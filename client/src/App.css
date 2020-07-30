@@ -403,7 +403,6 @@ h4 {
 @media (max-width: 920px) {
   .main-section-2 {
     padding: 20px;
-    background-color: red;
   }
   .form-group {
     flex-direction: column;
@@ -1167,6 +1166,38 @@ p {
   display: block;
   flex: 1;
   border-radius: 600px;
-  width: 222px;
-  height: 222px;
+  width: 200px;
+  height: 200px;
+}
+
+@media (max-width: 920px) {
+  .profile-copy-top {
+    flex-direction: column;
+  }
+  .profiles-status-none {
+    display: none;
+  }
+  .opacity {
+    margin-top: 20px;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 550px) {
+  .profiles {
+    flex-direction: column;
+    align-items: left;
+    padding: 40px 0;
+  }
+  .right-profiles {
+    margin-top: 30px;
+    padding: 0;
+  }
+}
+
+/* POSTS  */
+
+.posts-profile {
+  display: flex;
+  flex-direction: row;
 }

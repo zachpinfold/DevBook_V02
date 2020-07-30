@@ -46,7 +46,7 @@ const ProfileItem = ({
               </h2>
             </h2>
           </div>
-          <h2 className='profiles-status'>{status}</h2>
+          <h2 className='profiles-status profiles-status-none'>{status}</h2>
           <h2 className='profiles-status opacity'>{location}</h2>
           <h2 className='profiles-status'>Tech Skills:</h2>
           <p className='profiles-copy'>{skills}</p>

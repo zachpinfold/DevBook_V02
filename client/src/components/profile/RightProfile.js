@@ -4,19 +4,13 @@ import ProfileExperiences from "./ProfileExperiences";
 import ProfileEducation from "./ProfileEducation";
 import NewExperience from "../forms/NewExperience";
 import { connect } from "react-redux";
-import { getCurrentProfileExperience } from "../../actions/profile";
 import NewEducation from "../forms/NewEducation";
 import sortEduArray from "../../utils/sortEdu";
 import GitHub from "./GitHub";
 
 const MODAL_OPEN_CLASS = "modal-open";
 
-const RightProfile = ({
-  // profile,
-  getCurrentProfileExperience,
-  profile: { profile },
-  experiences
-}) => {
+const RightProfile = ({ user, profile: { profile } }) => {
   const [showExpForm, toggleShowExp] = useState(false);
   const [showEduForm, toggleShowEdu] = useState(false);
   // const { status, skills, bio } = profile;
@@ -64,14 +58,15 @@ const RightProfile = ({
               ))}
             </Fragment>
           )}
-          {
+          {user && profile.user._id === user._id && (
             <a
               className={sortedExp.length > 0 ? "btn-a-small" : "btn-a"}
               onClick={toggleShowExpForm}
             >
               Add work experience..
             </a>
-          }
+          )}
+
           {showExpForm && (
             <NewExperience toggleShowExpForm={toggleShowExpForm} />
           )}
@@ -86,22 +81,26 @@ const RightProfile = ({
               ))}
             </Fragment>
           )}
-          {
+
+          {user && profile.user._id === user._id && (
             <a
               className={sortedArray.length > 0 ? "btn-a-small" : "btn-a"}
               onClick={toggleShowEduForm}
             >
               Add education..
             </a>
-          }
+          )}
+
           {showEduForm && (
             <NewEducation toggleShowEduForm={toggleShowEduForm} />
           )}
 
-          <h3 className='profile-sub'>GitHub Repos</h3>
-          <div class='line-break-red'></div>
           {profile.githubusername && (
-            <GitHub username={profile.githubusername} />
+            <Fragment>
+              <h3 className='profile-sub'>GitHub Repos</h3>
+              <div class='line-break-red'></div>
+              <GitHub username={profile.githubusername} />
+            </Fragment>
           )}
         </div>
       </div>
@@ -115,8 +114,7 @@ RightProfile.propTypes = {
 };
 
 const MSTP = state => ({
-  profile: state.profile,
-  experiences: state.profile.experiences
+  profile: state.profile
 });
 
-export default connect(MSTP, { getCurrentProfileExperience })(RightProfile);
+export default connect(MSTP)(RightProfile);
