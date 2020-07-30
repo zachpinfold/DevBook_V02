@@ -4,9 +4,10 @@ import { Form } from "semantic-ui-react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import axios from "axios";
-import { getCurrentProfile } from "../../actions/profile";
+import { loadUser } from "../../actions/auth";
 import black_pic from "../../Assets/green_blank_pic.jpg";
 import { Redirect } from "react-router-dom";
+import { getProfileById } from "../../actions/profile";
 
 class PicUpload extends Component {
   constructor() {
@@ -25,7 +26,7 @@ class PicUpload extends Component {
   }
 
   handleFile = e => {
-    console.log("handle");
+    // console.log(this.props.auth);
     const fileReader = new FileReader();
     fileReader.onloadend = () => this.setState({ src: fileReader.result });
     fileReader.readAsDataURL(e.target.files[0]);
@@ -105,11 +106,15 @@ class PicUpload extends Component {
 
   addPhotoToUser = (user, data) => {
     console.log("data-send");
-    axios
-      .post("/api/profile/profile_image", data, {})
+    const URL1 = "/api/users/profile_image";
+    const URL2 = "/api/profile/profile_image";
+    const promise1 = axios.post(URL1, data, {});
+    const promise2 = axios.post(URL2, data, {});
+    Promise.all([promise1, promise2])
       .then(() => {
         this.setState({ loading: false });
-        this.props.getCurrentProfile();
+        this.props.loadUser();
+        this.props.getProfileById(this.props.auth.user._id);
       })
       .then(() => {
         this.setState({ src: null });
@@ -144,20 +149,25 @@ class PicUpload extends Component {
               src={this.props.profilePic ? this.props.profilePic : black_pic}
               alt='Picture of me'
             />
-            <div className='profile-pic-input'>
-              <input
-                type='file'
-                name='uploadfile'
-                id='img'
-                style={{ display: "none" }}
-                value={profile_pic}
-                onInput={this.handleFile}
-                onkeypress='return event.keyCode != 13;'
+            {!this.props.auth.loading &&
+              this.props.auth.user &&
+              this.props.profile.profile.user._id ===
+                this.props.auth.user._id && (
+                <div className='profile-pic-input'>
+                  <input
+                    type='file'
+                    name='uploadfile'
+                    id='img'
+                    style={{ display: "none" }}
+                    value={profile_pic}
+                    onInput={this.handleFile}
+                    onkeypress='return event.keyCode != 13;'
 
-                // onInput={console.log("input")}
-              />
-              <label class='custom-file-input' for='img'></label>
-            </div>
+                    // onInput={console.log("input")}
+                  />
+                  <label class='custom-file-input' for='img'></label>
+                </div>
+              )}
           </div>
           {/* {this.state.loaded && ( */}
           {/* )} */}
@@ -190,4 +200,11 @@ class PicUpload extends Component {
   }
 }
 
-export default connect(null, { getCurrentProfile })(PicUpload);
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile
+});
+
+export default connect(mapStateToProps, { loadUser, getProfileById })(
+  PicUpload
+);

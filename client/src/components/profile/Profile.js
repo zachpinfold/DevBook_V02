@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import PicUpload from "./PicUpload";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
+import { getProfileById } from "../../actions/profile";
+
 import LeftProfile from "./LeftProfile";
 import RightProfile from "./RightProfile";
 import CreateProfileLink from "./CreateProfileLink";
@@ -11,12 +13,14 @@ import Alert from "../layout/Alert";
 const MODAL_OPEN_CLASS = "body--modal-open";
 
 const Profile = ({
+  match,
   getCurrentProfile,
+  getProfileById,
   profile: { profile, loading },
   auth: { user }
 }) => {
   useEffect(() => {
-    getCurrentProfile();
+    getProfileById(match.params.id);
     const body = document.querySelector("#root");
 
     body.scrollIntoView(
@@ -25,26 +29,43 @@ const Profile = ({
       },
       500
     );
-  }, [getCurrentProfile]);
+  }, [getProfileById, match.params.id]);
 
-  return loading ? (
-    <div>Hello</div>
-  ) : (
+  return (
     <Fragment>
-      {profile === null ? (
-        <CreateProfileLink />
+      {!profile ? (
+        <div>hello</div>
       ) : (
-        <Fragment>
-          <section className='main-section-4'>
-            <Alert />
-            <div className='profile-div'>
-              <LeftProfile user={user} profile={profile} />
-              <RightProfile profile={profile} />
-            </div>
-          </section>
-        </Fragment>
+        <section className='main-section-4'>
+          <Alert />
+          <div className='profile-div'>
+            <LeftProfile user={user} profile={profile} />
+            <RightProfile profile={profile} />
+          </div>
+        </section>
       )}
     </Fragment>
+    // profile ? (
+    //   <div>Hello</div>
+    // ) : (
+    //   <Fragment>
+    //     {user && profile === null ? (
+    //       <CreateProfileLink />
+    //     ) : (
+    //       <Fragment>
+    //         {!loading && (
+    // <section className='main-section-4'>
+    //   <Alert />
+    //   <div className='profile-div'>
+    //     <LeftProfile user={user} profile={profile} />
+    //     <RightProfile profile={profile} />
+    //   </div>
+    // </section>
+    //         )}
+    //       </Fragment>
+    //     )}
+    //   </Fragment>
+    // );
   );
 };
 
@@ -58,4 +79,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Profile);
+export default connect(mapStateToProps, { getCurrentProfile, getProfileById })(
+  Profile
+);

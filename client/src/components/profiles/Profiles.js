@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import ProfileItem from "./ProfileItem";
 import { getProfiles } from "../../actions/profile";
 
-const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
+const Profiles = ({ getProfiles, profile: { profiles } }) => {
   // console.log(profiles);
   useEffect(() => {
     getProfiles();
   }, [getProfiles]);
   return (
     <Fragment>
-      {loading ? (
+      {profiles.loading ? (
         <div>loading...</div>
       ) : (
         <Fragment>

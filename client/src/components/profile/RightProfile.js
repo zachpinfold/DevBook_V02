@@ -39,10 +39,6 @@ const RightProfile = ({
     }
   };
 
-  useEffect(() => {
-    getCurrentProfileExperience();
-  }, [getCurrentProfileExperience]);
-
   const sortedExp = sortEduArray(profile.experiences);
   const sortedArray = sortEduArray(profile.education);
 

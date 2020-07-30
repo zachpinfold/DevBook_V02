@@ -13,7 +13,6 @@ const Dashboard = ({ isAuthenticated, getCurrentProfile, profile }) => {
 
   useEffect(() => {
     getCurrentProfile();
-    console.log(profile.profile);
   }, [getCurrentProfile]);
 
   return profile.profile && profile.loading ? (

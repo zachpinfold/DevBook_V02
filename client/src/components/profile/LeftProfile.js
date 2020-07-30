@@ -11,13 +11,11 @@ const LeftProfile = ({
     user: { name }
   }
 }) => {
-  console.log(user.name);
-
   return (
     <div className='left-profile-div'>
       <PicUpload profilePic={profilePic} />
       <div className='profile-left-info'>
-        <p className='profile-name'>{user.name}</p>
+        <p className='profile-name'>{name}</p>
         <p className='profile-location'>{location}</p>
         {website && (
           <a

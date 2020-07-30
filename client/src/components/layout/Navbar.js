@@ -1,28 +1,34 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
+import { getCurrentProfile } from "../../actions/profile";
 
-const Navbar = ({ profile, auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({
+  getCurrentProfile,
+  profile,
+  auth: { isAuthenticated, loading, user },
+  logout
+}) => {
+  useEffect(() => {
+    getCurrentProfile();
+  }, [getCurrentProfile]);
+
   const authLinks = (
     <ul>
       <li>
-        <a style={{ cursor: "pointer" }} onClick={logout} to='/register'>
+        <Link style={{ cursor: "pointer" }} onClick={logout} to='/login'>
           Logout
-        </a>
+        </Link>
       </li>
       <li>
         <Link to='/profiles'>Profiles</Link>
       </li>
-      {profile.profile && (
-        <Link to='/profile-me'>
+      {user && (
+        <Link to={`/profile/${user._id}`}>
           <div className='navbar-image-div'>
-            <img
-              className='nav-profile-image'
-              src={profile.profile.profilePic}
-              alt=''
-            />
+            <img className='nav-profile-image' src={user.profilePic} alt='' />
             <div className='profile-image-nav-overlay'></div>
           </div>
         </Link>
@@ -77,4 +83,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout, getCurrentProfile })(Navbar);

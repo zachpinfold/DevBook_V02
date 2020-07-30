@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import { deleteExperience } from "../../actions/profile";
 
 const ProfileExperiences = ({
+  profile,
+  auth,
   experience: { company, title, location, current, to, from, description, _id },
   deleteExperience
 }) => {
-  // console.log(company);
-
   return (
     <Fragment>
       <div>
@@ -17,14 +17,18 @@ const ProfileExperiences = ({
           <h4 className='experience-company'>
             {company} - {title}
           </h4>
-          <button
-            className='btn-no-back'
-            onClick={() => {
-              deleteExperience(_id);
-            }}
-          >
-            <i className='fas fa-times exp-del'></i>
-          </button>
+          {!auth.loading &&
+            auth.user &&
+            profile.profile.user._id === auth.user._id && (
+              <button
+                className='btn-no-back'
+                onClick={() => {
+                  deleteExperience(_id);
+                }}
+              >
+                <i className='fas fa-times exp-del'></i>
+              </button>
+            )}
         </div>
         <p className='experience-time'>
           <Moment format='MMM YYYY'>{from}</Moment> -{" "}
@@ -40,7 +44,15 @@ const ProfileExperiences = ({
 ProfileExperiences.propTypes = {
   edu: PropTypes.array.isRequired,
   experience: PropTypes.object.isRequired,
-  deleteExperience: PropTypes.func.isRequired
+  deleteExperience: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
-export default connect(null, { deleteExperience })(ProfileExperiences);
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.profile
+});
+
+export default connect(mapStateToProps, { deleteExperience })(
+  ProfileExperiences
+);
