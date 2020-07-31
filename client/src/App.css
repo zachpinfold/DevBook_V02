@@ -1198,6 +1198,64 @@ p {
 /* POSTS  */
 
 .posts-profile {
+  padding-bottom: 25px;
+  padding-top: 10px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+.posts {
+  margin-top: 60px;
+}
+
+.posts-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.posts-likes {
+  font-size: 16px;
+  font-family: var(--futuraBold);
+  color: white;
+  margin-left: 5px;
+}
+
+.like-icon {
+  color: white;
+}
+
+.likes-div {
+  align-items: center;
+  display: flex;
+  margin-top: 10px;
+  flex-direction: row;
+}
+
+.post-title {
+  font-size: 60px;
+}
+
+.post-profile-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.post-date-div {
+  flex-direction: column;
+}
+
+.post-top-from {
+  color: var(--blue);
+  font-family: var(--futuraBold);
+}
+
+.post-date {
+  font-family: var(--helveticaLight);
+  color: white;
+  font-size: 18px;
 }

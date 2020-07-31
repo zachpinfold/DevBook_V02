@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import { getProfileById } from "../../actions/profile";
 
 const PostItem = ({
   deletePost,
+  getProfileById,
   addLike,
   removeLike,
   auth,
@@ -15,27 +16,39 @@ const PostItem = ({
   showActions,
   profile: { loading, profile }
 }) => {
-  useEffect(() => {
-    if (auth.user.id !== null) {
-      getProfileById(auth.user.id);
-    }
-  }, [getProfileById]);
+  const [showProfilePic, setProfilePic] = useState(false);
 
-  console.log(profile);
+  useEffect(() => {
+    getProfileById(user).then(() => {
+      setProfilePic(true);
+    });
+  }, [getProfileById]);
 
   return loading ? (
     <div>Hello</div>
   ) : (
     <Fragment>
-      <div class='dashboard-card'>
-        <to to={`/posts/${_id}`} className='card-title-link'>
+      <div class='dashboard-card posts'>
+        <Link to={`/posts/${_id}`} className='card-title-link'>
           <h2 class='card-title'>{title}</h2>
-        </to>
+        </Link>
+
         <div className='posts-profile'>
-          <img className='nav-profile-image' src={profile.profilePic} alt='' />
+          {showProfilePic && (
+            <img
+              className='nav-profile-image'
+              src={profile.profilePic}
+              alt=''
+            />
+          )}
           <h4 class='news-top-from'>{name}</h4>
         </div>
         <p className='dash-description'>{text}</p>
+        <div className='likes-div'>
+          {" "}
+          <i className='fas fa-heart like-icon'></i>
+          <p className='posts-likes'>{likes.length}</p>
+        </div>
       </div>
     </Fragment>
   );

@@ -26,6 +26,7 @@ router.post(
         title: req.body.title,
         name: user.name,
         avatar: user.avatar,
+        profilePic: user.profilePic,
         user: req.user.id
       });
 

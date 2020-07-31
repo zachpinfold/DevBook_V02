@@ -20,6 +20,9 @@ const PostSchema = new Schema({
   avatar: {
     type: String
   },
+  profilePic: {
+    type: String
+  },
   likes: [
     {
       user: {
