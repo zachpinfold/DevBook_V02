@@ -6,17 +6,17 @@ import { getPost } from "../../actions/post";
 import { connect } from "react-redux";
 import SinglePostItem from "./SinglePostItem";
 
-const Post = ({ match, getPost, post: { post, loading } }) => {
+const Post = ({ auth, match, getPost, post: { post, loading } }) => {
   useEffect(() => {
     getPost(match.params.id);
   }, [getPost, match.params.id]);
 
-  return loading ? (
+  return post === null || auth.loading ? (
     <div>Hello</div>
   ) : (
     <Fragment>
       <section class='main-section-2'>
-        <SinglePostItem post={post} />
+        <SinglePostItem auth={auth} post={post} />
       </section>
     </Fragment>
   );
@@ -27,7 +27,8 @@ Post.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  post: state.post
+  post: state.post,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { getPost })(Post);

@@ -2,8 +2,9 @@ import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { logout } from "../../actions/auth";
-import { getCurrentProfile } from "../../actions/profile";
+import { logout } from "../../../actions/auth";
+import { getCurrentProfile } from "../../../actions/profile";
+import Burger from "./Burger";
 
 const Navbar = ({
   getCurrentProfile,
@@ -71,7 +72,12 @@ const Navbar = ({
         </Link>
       </div>
       {!loading && (
-        <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+        <Burger
+          isAuthenticated={isAuthenticated}
+          guestLinks={guestLinks}
+          loading={loading}
+          authLinks={authLinks}
+        />
       )}
     </nav>
   );

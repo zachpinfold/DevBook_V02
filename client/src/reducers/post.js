@@ -8,6 +8,7 @@ import {
   ADD_COMMENT,
   REMOVE_COMMENT
 } from "../actions/types";
+import { post } from "request";
 
 const initialState = {
   posts: [],
@@ -45,6 +46,7 @@ export default function (state = initialState, action) {
     case UPDATE_LIKES:
       return {
         ...state,
+        post: { ...state.post, likes: payload.likes },
         posts: state.posts.map(post =>
           post._id === payload.postId ? { ...post, likes: payload.likes } : post
         ),

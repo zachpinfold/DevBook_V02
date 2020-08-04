@@ -3,46 +3,53 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
-import { addLike, removeLike, deletePost } from "../../actions/post";
-import { getProfileById } from "../../actions/profile";
+import { deletePost } from "../../actions/post";
 
 const PostItem = ({
   deletePost,
-  getProfileById,
-  addLike,
-  removeLike,
   auth,
-  post: { _id, title, text, name, avatar, user, likes, comments, date },
-  showActions,
-  profile: { loading, profile }
+  post: {
+    _id,
+    profilePic,
+    title,
+    text,
+    name,
+    avatar,
+    user,
+    likes,
+    comments,
+    date,
+    loading
+  }
 }) => {
-  const [showProfilePic, setProfilePic] = useState(false);
-
-  useEffect(() => {
-    getProfileById(user).then(() => {
-      setProfilePic(true);
-    });
-  }, [getProfileById]);
-
-  return loading ? (
+  return loading || auth.loading ? (
     <div>Hello</div>
   ) : (
     <Fragment>
       <div class='dashboard-card posts'>
+        <div className='profile-card-top'>
+          {!auth.loading && user === auth.user._id && (
+            <button
+              className='btn-no-back'
+              onClick={() => {
+                deletePost(_id);
+              }}
+            >
+              <i className='fas fa-times exp-del'></i>
+            </button>
+          )}
+        </div>
         <Link to={`/posts/${_id}`} className='card-title-link'>
           <h2 class='card-title'>{title}</h2>
         </Link>
 
         <div className='posts-profile'>
-          {showProfilePic && (
-            <img
-              className='nav-profile-image'
-              src={profile.profilePic}
-              alt=''
-            />
-          )}
-          <h4 class='news-top-from'>{name}</h4>
+          <img className='nav-profile-image' src={profilePic} alt='' />
+          <Link to={`/profile/${auth.user._id}`} className='card-title-link'>
+            <h4 class='news-top-from'>{name}</h4>
+          </Link>
         </div>
+
         <p className='dash-description'>{text}</p>
         <div className='likes-div'>
           {" "}
@@ -73,8 +80,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  getProfileById,
-  addLike,
-  removeLike,
   deletePost
 })(PostItem);

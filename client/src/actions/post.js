@@ -12,9 +12,13 @@ import {
 } from "./types";
 
 // Get posts
-export const getPosts = () => async dispatch => {
+export const getPosts = limit => async dispatch => {
   try {
-    const res = await axios.get("/api/posts");
+    const res = await axios.get("/api/posts", {
+      params: {
+        limit
+      }
+    });
 
     dispatch({
       type: GET_POSTS,
@@ -30,7 +34,6 @@ export const getPosts = () => async dispatch => {
 
 // Add like
 export const addLike = postId => async dispatch => {
-  //   console.log(postId);
   try {
     const res = await axios.put(`/api/posts/like/${postId}`);
 
@@ -83,7 +86,7 @@ export const deletePost = postId => async dispatch => {
 };
 
 // Add post
-export const addPost = formData => async dispatch => {
+export const addPost = (formData, history) => async dispatch => {
   const config = {
     heders: {
       "Content-Type": "application/json"
@@ -93,12 +96,16 @@ export const addPost = formData => async dispatch => {
   try {
     const res = await axios.post("/api/posts/", formData, config);
 
+    console.log(res);
+
     dispatch({
       type: ADD_POST,
       payload: res.data
     });
 
     dispatch(setAlert("Post Created", "sucess"));
+
+    history.push("/posts");
   } catch (err) {
     dispatch({
       type: POST_ERROR,
@@ -109,7 +116,6 @@ export const addPost = formData => async dispatch => {
 
 // Get post
 export const getPost = id => async dispatch => {
-  console.log("post test");
   try {
     const res = await axios.get(`/api/posts/${id}`);
 
@@ -127,7 +133,6 @@ export const getPost = id => async dispatch => {
 
 // Add comment
 export const addComment = (postId, text) => async dispatch => {
-  console.log(postId, text);
   try {
     const res = await axios.post(`/api/posts/comment/${postId}`, { text });
 

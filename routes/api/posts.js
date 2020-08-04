@@ -20,7 +20,6 @@ router.post(
 
     try {
       const user = await User.findById(req.user.id).select("-password");
-      console.log(User);
       const newPost = new Post({
         text: req.body.text,
         title: req.body.title,
@@ -45,9 +44,11 @@ router.post(
 // @access  Private
 
 router.get("/", auth, async (req, res) => {
+  const limit = parseInt(req.query.limit);
+  console.log(limit);
   try {
     // .populate adds the extra info from the user schema
-    const posts = await Post.find().sort({ date: -1 });
+    const posts = await Post.find().sort({ date: -1 }).limit(limit);
     res.json(posts);
   } catch (err) {
     console.error(err.message);

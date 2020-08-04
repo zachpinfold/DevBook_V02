@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import API from "../../config/config";
 import NewsCard from "../dashboard/NewsCard";
+import PostCard from "../dashboard/PostCard";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import DashboardOptions from "./DashboardOptions";
@@ -19,16 +20,18 @@ const Dashboard = ({ isAuthenticated, getCurrentProfile, profile }) => {
     <div>Hello</div>
   ) : (
     <Fragment>
-      <section class='main-section-2'>
+      <section className='main-section-2'>
         {/* {profile.profile === null && <Redirect to='create-profile' />} */}
-        <h2 class='heading'>Contol Centre</h2>
-        <div class='line-break'></div>
+        <h2 className='heading'>Contol Centre</h2>
+        <div className='line-break'></div>
         {!profile.loading && profile.profile !== null ? (
           <Fragment>
-            <div class='dashboard'>
-              <div class='dashboard-left'>
-                <h4 class='news-top'>Latest Tech News</h4>
+            <div className='dashboard'>
+              <div className='dashboard-left'>
+                <h4 className='news-top'>Latest Tech News</h4>
                 <NewsCard />
+                <h4 className='news-top'>Latest Dev Post</h4>
+                <PostCard />
               </div>
               <DashboardOptions profile={profile} />
             </div>

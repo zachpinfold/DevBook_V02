@@ -110,6 +110,7 @@ export const getProfileById = userId => async dispatch => {
 export const createProfile = (
   formData,
   history,
+  _id,
   edit = false
 ) => async dispatch => {
   try {
@@ -127,10 +128,7 @@ export const createProfile = (
     });
 
     dispatch(setAlert(edit ? "Profile Updated" : "Profile Created", "success"));
-
-    if (!edit) {
-      history.push("/profile-me");
-    }
+    history.push(`/profile/${_id}`);
   } catch (err) {
     const errors = err.response.data.errors;
 

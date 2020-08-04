@@ -162,7 +162,7 @@ h4 {
   /* background-color: antiquewhite; */
   /* padding: 0.7rem 2rem; */
   /* position: fixed; */
-  z-index: 1;
+  z-index: 10;
   height: 100px;
   width: 100%;
   top: 0;
@@ -173,7 +173,7 @@ h4 {
 .navbar ul {
   display: flex;
   font-family: var(--futuraBold);
-  margin-right: 20px;
+  /* margin-right: 20px; */
   list-style-type: none;
   align-items: center;
 }
@@ -219,6 +219,7 @@ h4 {
 .nav-profile-image:hover {
   color: var(--blue);
 }
+
 /* Homepage */
 
 .main-section {
@@ -815,7 +816,7 @@ select {
 }
 
 .cropDiv {
-  z-index: 2;
+  /* z-index: 2; */
   position: fixed;
   /* display: flex; */
   /* overflow: none; */
@@ -936,6 +937,7 @@ select {
   border: 1px solid white;
   border-radius: 5px;
   padding: 20px;
+  margin-bottom: 40px;
 }
 
 .news-top {
@@ -972,6 +974,12 @@ select {
 .dash-description {
   color: white;
   letter-spacing: 1px;
+  /* text-overflow: ellipsis; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 
 .dash-link {
@@ -1098,7 +1106,8 @@ p {
   }
   .dashboard-right {
     order: -1;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    margin-top: 0px;
   }
   .dash-link {
     display: none;
@@ -1206,7 +1215,7 @@ p {
 }
 
 .posts {
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 .posts-top {
@@ -1224,6 +1233,7 @@ p {
 
 .like-icon {
   color: white;
+  font-size: 23px;
 }
 
 .likes-div {
@@ -1243,6 +1253,7 @@ p {
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
+  justify-content: space-between;
 }
 
 .post-date-div {
@@ -1258,4 +1269,50 @@ p {
   font-family: var(--helveticaLight);
   color: white;
   font-size: 18px;
+}
+
+.post-left-area {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-no-back {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.post-copy {
+  margin-top: 40px;
+  font-family: var(--helveticaLight);
+  font-size: 22px;
+  color: white;
+  white-space: pre-wrap;
+  padding-bottom: 50px;
+}
+
+.profile-card-top {
+  text-align: right;
+  margin-bottom: -10px;
+}
+
+.post-form {
+  padding-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .profile-image-div {
+    position: relative;
+    z-index: -1;
+  }
+  .profile-image-nav-overlay {
+    margin-right: 0px;
+  }
+  .navbar-image-div {
+    margin-top: 10px;
+    padding-left: 15px;
+  }
 }
