@@ -1,10 +1,11 @@
 import React, { useState, Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile } from "../../actions/profile";
+import Alert from "../layout/Alert";
 
-const CreateProfile = ({ createProfile, history }) => {
+const CreateProfile = ({ createProfile, history, auth }) => {
   const [formData, setFormData] = useState({
     company: "",
     website: "",
@@ -31,14 +32,15 @@ const CreateProfile = ({ createProfile, history }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    createProfile(formData, history);
+    createProfile(formData, history, auth.user._id);
   };
 
   return (
     <Fragment>
-      <section style={{ marginTop: "60px" }} class='main-section-3'>
+      <section style={{ marginTop: "60px" }} className='main-section-3'>
         <h2 className='heading'>Basic Profile Setup</h2>
         <div className='line-break'></div>
+        <Alert />
         <div className='new-profile-div'>
           <div className='left-profile'>
             <form action='' className='form' onSubmit={e => onSubmit(e)}>
@@ -49,9 +51,6 @@ const CreateProfile = ({ createProfile, history }) => {
                 id='title'
                 onChange={e => onChange(e)}
               >
-                <option style={{ color: "white" }} defaultValue>
-                  *What do you curently do?
-                </option>
                 <option value='0'>* Select Professional Status</option>
                 <option value='Developer'>Developer</option>
                 <option value='Junior Developer'>Junior Developer</option>
@@ -191,8 +190,7 @@ const CreateProfile = ({ createProfile, history }) => {
               </div>
 
               <div
-                style={{ height: "80px" }}
-                style={{ marginTop: "20px" }}
+                style={{ height: "80px", marginTop: "20px" }}
                 className={`position-profile ${
                   githubusername.length > 1 ? "form-complete" : null
                 }`}
@@ -213,7 +211,12 @@ const CreateProfile = ({ createProfile, history }) => {
 };
 
 CreateProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired
+  createProfile: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+const mstp = state => ({
+  auth: state.auth
+});
+
+export default connect(mstp, { createProfile })(withRouter(CreateProfile));

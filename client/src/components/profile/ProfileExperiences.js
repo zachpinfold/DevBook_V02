@@ -42,7 +42,6 @@ const ProfileExperiences = ({
 };
 
 ProfileExperiences.propTypes = {
-  edu: PropTypes.array.isRequired,
   experience: PropTypes.object.isRequired,
   deleteExperience: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired

@@ -1,5 +1,3 @@
-import axios from "axios";
-// import { setAlert } from "./alert";
 import { GET_NEWS_POST, NEWS_ERROR } from "./types";
 import API from "../config/config";
 

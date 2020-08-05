@@ -13,9 +13,9 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
     <div>Hell</div>
   ) : (
     <Fragment>
-      <section class='main-section-2'>
-        <h2 class='heading'>Dev Posts</h2>
-        <div class='line-break'></div>
+      <section className='main-section-2'>
+        <h2 className='heading'>Dev Posts</h2>
+        <div className='line-break'></div>
         <Link to='/new-post'>
           <button
             style={{ marginTop: "10px" }}

@@ -1,9 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import PicUpload from "./PicUpload";
 
 const LeftProfile = ({
-  user,
   profile: {
     profilePic,
     location,
@@ -27,9 +25,6 @@ const LeftProfile = ({
             Website
           </a>
         )}
-        {/* <a href='' className='btn-CV'>
-          CV
-        </a> */}
       </div>
     </div>
   );

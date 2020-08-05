@@ -136,9 +136,12 @@ const NewEducation = ({ addEducation, history, toggleShowEduForm }) => {
               ></textarea>
             </div>
             <input type='submit' class='btn btn-primary my-1' />
-            <a class='btn-a-back' onClick={() => toggleShowEduForm("hide")}>
+            <button
+              class='btn-a-back btn-no-back'
+              onClick={() => toggleShowEduForm("hide")}
+            >
               Go Back
-            </a>
+            </button>
           </form>
         </div>
       </Fragment>

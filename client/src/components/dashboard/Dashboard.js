@@ -1,7 +1,5 @@
 import React, { useEffect, Fragment } from "react";
-import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import API from "../../config/config";
 import NewsCard from "../dashboard/NewsCard";
 import PostCard from "../dashboard/PostCard";
 import { connect } from "react-redux";
@@ -9,7 +7,7 @@ import { getCurrentProfile } from "../../actions/profile";
 import DashboardOptions from "./DashboardOptions";
 import CreateProfileLink from "../profile/CreateProfileLink";
 
-const Dashboard = ({ isAuthenticated, getCurrentProfile, profile }) => {
+const Dashboard = ({ getCurrentProfile, profile }) => {
   // console.log(profile.loading);
 
   useEffect(() => {
@@ -49,11 +47,11 @@ const Dashboard = ({ isAuthenticated, getCurrentProfile, profile }) => {
 };
 
 Dashboard.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+  profile: PropTypes.object.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
   profile: state.profile
 });
 

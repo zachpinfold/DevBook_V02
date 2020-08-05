@@ -11,7 +11,7 @@ import {
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 
-const proxy = "http://localhost:5000";
+// const proxy = "http://localhost:5000";
 
 // Load User
 export const loadUser = () => async dispatch => {

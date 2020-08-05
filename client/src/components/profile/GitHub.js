@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { getGithubRepos } from "../../actions/profile";
 
 const ProfileGithub = ({ username, getGithubRepos, repos }) => {
-  console.log(getGithubRepos);
   useEffect(() => {
     getGithubRepos(username);
-  }, [getGithubRepos]);
+  }, [getGithubRepos, username]);
 
   return (
     <div className='profile-github'>
@@ -16,7 +15,7 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
         <div>hello</div>
       ) : (
         repos.map(repo => (
-          <Fragment key={repo._id}>
+          <Fragment key={repo.id}>
             <h4 className='experience-company repo-title'>{repo.name}</h4>
             <p className='profile-copy repo-copy'>{repo.description}</p>
             <a
@@ -27,34 +26,6 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
             >
               View Repo
             </a>
-
-            {/* <div key={repo._id} className='repo bg-white p-1 my-1'>
-              <div>
-                <h4>
-                  <a
-                    href={repo.html_url}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    {repo.name}
-                  </a>
-                </h4>
-                <p>{repo.description}</p>
-              </div>
-              <div>
-                <ul>
-                  <li className='badge badge-primary'>
-                    Stars: {repo.stargazers_count}
-                  </li>
-                  <li className='badge badge-dark'>
-                    Watchers: {repo.watchers}
-                  </li>
-                  <li className='badge badge-light'>
-                    FOrks: {repo.forks_count}
-                  </li>
-                </ul>
-              </div>
-            </div> */}
           </Fragment>
         ))
       )}

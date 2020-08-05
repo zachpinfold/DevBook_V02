@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Ul = styled.ul`
@@ -37,7 +37,6 @@ const RightNav = ({
   guestLinks,
   isAuthenticated
 }) => {
-  console.log(isAuthenticated);
   return (
     !loading && <Ul open={open}>{isAuthenticated ? authLinks : guestLinks}</Ul>
   );

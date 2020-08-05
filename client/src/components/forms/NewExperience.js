@@ -82,7 +82,7 @@ const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
             </div>
             <div className='form-group'>
               <div className='input-half'>
-                <h4 className='form-headings'>*First Name</h4>
+                <h4 className='form-headings'>*From</h4>
                 <input
                   type='date'
                   name='from'
@@ -91,7 +91,7 @@ const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
                 />
               </div>
               <div className='input-half-right'>
-                <h4 className='form-headings'>*Last Name</h4>
+                <h4 className='form-headings'>*To</h4>
                 <input
                   type='date'
                   name='to'
@@ -129,9 +129,12 @@ const NewExperience = ({ addExperience, history, toggleShowExpForm }) => {
               ></textarea>
             </div>
             <input type='submit' class='btn btn-primary my-1' />
-            <a class='btn-a-back' onClick={() => toggleShowExpForm("hide")}>
+            <button
+              class='btn-a-back btn-no-back'
+              onClick={() => toggleShowExpForm("hide")}
+            >
               Go Back
-            </a>
+            </button>
           </form>
         </div>
       </Fragment>

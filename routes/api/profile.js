@@ -255,7 +255,9 @@ router.put(
     };
 
     try {
-      const profile = await Profile.findOne({ user: req.user.id });
+      const profile = await Profile.findOne({
+        user: req.user.id
+      }).populate("user", ["name", "avatar"]);
       profile.experiences.unshift(newExp);
       await profile.save();
       res.json(profile);
@@ -272,7 +274,9 @@ router.put(
 
 router.delete("/experience/:exp_id", auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id });
+    const profile = await Profile.findOne({
+      user: req.user.id
+    }).populate("user", ["name", "avatar"]);
 
     // GET remove index
     const removeIndex = profile.experiences
@@ -329,7 +333,9 @@ router.put(
     };
 
     try {
-      const profile = await Profile.findOne({ user: req.user.id });
+      const profile = await Profile.findOne({
+        user: req.user.id
+      }).populate("user", ["name", "avatar"]);
       console.log(profile);
       profile.education.unshift(newEdu);
       await profile.save();
@@ -347,7 +353,9 @@ router.put(
 
 router.delete("/education/:edu_id", auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id });
+    const profile = await Profile.findOne({
+      user: req.user.id
+    }).populate("user", ["name", "avatar"]);
 
     // GET remove index
     const removeIndex = profile.education

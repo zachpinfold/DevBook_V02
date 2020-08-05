@@ -1,12 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Form } from "semantic-ui-react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import axios from "axios";
 import { loadUser } from "../../actions/auth";
 import black_pic from "../../Assets/green_blank_pic.jpg";
-import { Redirect } from "react-router-dom";
 import { getProfileById } from "../../actions/profile";
 
 class PicUpload extends Component {
@@ -145,9 +143,9 @@ class PicUpload extends Component {
           <label htmlFor='profile_pic'></label>
           <div className='profile-image-div'>
             <img
-              class='profile-image'
+              className='profile-image'
               src={this.props.profilePic ? this.props.profilePic : black_pic}
-              alt='Picture of me'
+              alt='profile pic of me'
             />
             {!this.props.auth.loading &&
               this.props.auth.user &&
@@ -165,7 +163,7 @@ class PicUpload extends Component {
 
                     // onInput={console.log("input")}
                   />
-                  <label class='custom-file-input' for='img'></label>
+                  <label className='custom-file-input' for='img'></label>
                 </div>
               )}
           </div>

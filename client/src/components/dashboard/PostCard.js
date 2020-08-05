@@ -14,15 +14,15 @@ const PostCard = ({ getPosts, post: { loading, posts } }) => {
     <div>Hello</div>
   ) : (
     <Fragment>
-      <div class='dashboard-card'>
+      <div className='dashboard-card'>
         <Link
           to={`posts/${posts[0]._id}`}
           className='card-title-link'
           href={""}
         >
-          <h2 class='card-title'>{posts[0].title}</h2>
+          <h2 className='card-title'>{posts[0].title}</h2>
         </Link>
-        <h4 class='news-top-from'>{posts[0].name}</h4>
+        <h4 className='news-top-from'>{posts[0].name}</h4>
         <p className='dash-description'>{posts[0].text}</p>
       </div>
     </Fragment>
@@ -30,7 +30,8 @@ const PostCard = ({ getPosts, post: { loading, posts } }) => {
 };
 
 PostCard.propTypes = {
-  getPosts: PropTypes.func.isRequired
+  getPosts: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

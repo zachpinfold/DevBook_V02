@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import ProfileExperiences from "./ProfileExperiences";
 import ProfileEducation from "./ProfileEducation";
@@ -45,26 +45,30 @@ const RightProfile = ({ user, profile: { profile } }) => {
           <h3 style={{ marginTop: "10px" }} className='profile-sub'>
             About me
           </h3>
-          <div class='line-break-red'></div>
+          <div className='line-break-red'></div>
 
           <p className='profile-copy'>{profile.bio}</p>
           <h3 className='profile-sub'>Work Experience</h3>
-          <div class='line-break-red'></div>
+          <div className='line-break-red'></div>
 
-          {sortedExp.length > 0 && (
+          {profile.experiences.length > 0 && (
             <Fragment>
-              {sortedExp.map(exp => (
+              {profile.experiences.map(exp => (
                 <ProfileExperiences key={exp._id} experience={exp} />
               ))}
             </Fragment>
           )}
           {user && profile.user._id === user._id && (
-            <a
-              className={sortedExp.length > 0 ? "btn-a-small" : "btn-a"}
+            <button
+              className={
+                sortedExp.length > 0
+                  ? "btn-a-small btn-no-back"
+                  : "btn-a btn-no-back"
+              }
               onClick={toggleShowExpForm}
             >
               Add work experience..
-            </a>
+            </button>
           )}
 
           {showExpForm && (
@@ -72,7 +76,7 @@ const RightProfile = ({ user, profile: { profile } }) => {
           )}
 
           <h3 className='profile-sub'>Education</h3>
-          <div class='line-break-red'></div>
+          <div className='line-break-red'></div>
 
           {sortedArray.length > 0 && (
             <Fragment>
@@ -83,12 +87,16 @@ const RightProfile = ({ user, profile: { profile } }) => {
           )}
 
           {user && profile.user._id === user._id && (
-            <a
-              className={sortedArray.length > 0 ? "btn-a-small" : "btn-a"}
+            <button
+              className={
+                sortedArray.length > 0
+                  ? "btn-a-small btn-no-back"
+                  : "btn-a btn-no-back"
+              }
               onClick={toggleShowEduForm}
             >
               Add education..
-            </a>
+            </button>
           )}
 
           {showEduForm && (
@@ -98,7 +106,7 @@ const RightProfile = ({ user, profile: { profile } }) => {
           {profile.githubusername && (
             <Fragment>
               <h3 className='profile-sub'>GitHub Repos</h3>
-              <div class='line-break-red'></div>
+              <div className='line-break-red'></div>
               <GitHub username={profile.githubusername} />
             </Fragment>
           )}
@@ -109,8 +117,7 @@ const RightProfile = ({ user, profile: { profile } }) => {
 };
 
 RightProfile.propTypes = {
-  // profile: PropTypes.object.isRequired,
-  getCurrentProfileExperience: PropTypes.func.isRequired
+  profile: PropTypes.object.isRequired
 };
 
 const MSTP = state => ({

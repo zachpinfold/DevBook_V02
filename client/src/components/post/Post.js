@@ -1,7 +1,5 @@
 import React, { useEffect, Fragment } from "react";
-import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import API from "../../config/config";
 import { getPost } from "../../actions/post";
 import { connect } from "react-redux";
 import SinglePostItem from "./SinglePostItem";
@@ -15,7 +13,7 @@ const Post = ({ auth, match, getPost, post: { post, loading } }) => {
     <div>Hello</div>
   ) : (
     <Fragment>
-      <section class='main-section-2'>
+      <section className='main-section-2'>
         <SinglePostItem auth={auth} post={post} />
       </section>
     </Fragment>

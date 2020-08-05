@@ -12,11 +12,16 @@ const NewsCard = ({ getNews, news: { loading, news } }) => {
     <div>Hello</div>
   ) : (
     <Fragment>
-      <div class='dashboard-card'>
-        <a target='_blank' className='card-title-link' href={news.url}>
-          <h2 class='card-title'>{news.title}</h2>
+      <div className='dashboard-card'>
+        <a
+          target='_blank'
+          rel='noopener noreferrer'
+          className='card-title-link'
+          href={news.url}
+        >
+          <h2 className='card-title'>{news.title}</h2>
         </a>
-        <h4 class='news-top-from'>{news.source.name}</h4>
+        <h4 className='news-top-from'>{news.source.name}</h4>
         <p className='dash-description'>{news.description}</p>
       </div>
     </Fragment>

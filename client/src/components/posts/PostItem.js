@@ -1,32 +1,19 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Moment from "react-moment";
 import { deletePost } from "../../actions/post";
 
 const PostItem = ({
   deletePost,
   auth,
-  post: {
-    _id,
-    profilePic,
-    title,
-    text,
-    name,
-    avatar,
-    user,
-    likes,
-    comments,
-    date,
-    loading
-  }
+  post: { _id, profilePic, title, text, name, user, likes, loading }
 }) => {
   return loading || auth.loading ? (
     <div>Hello</div>
   ) : (
     <Fragment>
-      <div class='dashboard-card posts'>
+      <div className='dashboard-card posts'>
         <div className='profile-card-top'>
           {!auth.loading && user === auth.user._id && (
             <button
@@ -40,13 +27,13 @@ const PostItem = ({
           )}
         </div>
         <Link to={`/posts/${_id}`} className='card-title-link'>
-          <h2 class='card-title'>{title}</h2>
+          <h2 className='card-title'>{title}</h2>
         </Link>
 
         <div className='posts-profile'>
           <img className='nav-profile-image' src={profilePic} alt='' />
           <Link to={`/profile/${auth.user._id}`} className='card-title-link'>
-            <h4 class='news-top-from'>{name}</h4>
+            <h4 className='news-top-from'>{name}</h4>
           </Link>
         </div>
 
@@ -68,15 +55,11 @@ PostItem.defaultProps = {
 PostItem.propTypes = {
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  addLike: PropTypes.func.isRequired,
-  removeLike: PropTypes.func.isRequired,
-  deletePost: PropTypes.func.isRequired,
-  profile: PropTypes.func.isRequired
+  deletePost: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, {

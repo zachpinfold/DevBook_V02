@@ -1,21 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../../actions/auth";
-import { getCurrentProfile } from "../../../actions/profile";
 import Burger from "./Burger";
 
-const Navbar = ({
-  getCurrentProfile,
-  profile,
-  auth: { isAuthenticated, loading, user },
-  logout
-}) => {
-  useEffect(() => {
-    getCurrentProfile();
-  }, [getCurrentProfile]);
-
+const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   const authLinks = (
     <ul>
       <li>
@@ -85,13 +75,11 @@ const Navbar = ({
 
 Navbar.prototype = {
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { logout, getCurrentProfile })(Navbar);
+export default connect(mapStateToProps, { logout })(Navbar);

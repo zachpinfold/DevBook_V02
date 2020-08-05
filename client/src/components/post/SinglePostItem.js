@@ -1,7 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Moment from "react-moment";
-import { addLike, removeLike, deletePost } from "../../actions/post";
+import { addLike, removeLike } from "../../actions/post";
 import { connect } from "react-redux";
 
 const SinglePostItem = ({ post, removeLike, addLike, auth }) => {
@@ -16,7 +15,7 @@ const SinglePostItem = ({ post, removeLike, addLike, auth }) => {
       <h1 className='post-title'>{post.title}</h1>
       <div className='post-profile-area'>
         <div className='post-left-area'>
-          <img class='nav-profile-image' src={post.profilePic} alt='' />
+          <img className='nav-profile-image' src={post.profilePic} alt='' />
           <div className='post-date-div'>
             <h4 className='post-top-from'>{post.name}</h4>
             <Moment className='post-date' format='DD MMM YYYY'>

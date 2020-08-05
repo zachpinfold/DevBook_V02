@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import black_pic from "../../Assets/green_blank_pic.jpg";
-import sortEduArray from "../../utils/sortEdu";
 
 import PropTypes from "prop-types";
 
@@ -16,11 +15,7 @@ const ProfileItem = ({
     experiences
   }
 }) => {
-  const sortedExp = sortEduArray(experiences);
-  const { title } = experiences[0];
-  const { company } = experiences[0];
-
-  console.log(title);
+  // const sortedExp = sortEduArray(experiences);
 
   return (
     <Fragment>
@@ -28,9 +23,9 @@ const ProfileItem = ({
         <div className='left-profiles'>
           <Link to={`/profile/${_id}`}>
             <img
-              class='profile-images'
+              className='profile-images'
               src={profilePic ? profilePic : black_pic}
-              alt='Picture of me'
+              alt='my profile pic'
             />
           </Link>
         </div>
@@ -39,12 +34,14 @@ const ProfileItem = ({
             <Link to={`/profile/${_id}`}>
               <h2 className='profiles-name profiles-link'>{name}</h2>
             </Link>
-            <h2 className='profiles-status'>
-              {title}
-              <h2 style={{ opacity: "0.7" }} className='profiles-status'>
-                at {company}
-              </h2>
-            </h2>
+            {experiences.length > 0 && (
+              <div style={{ textAlign: "right" }}>
+                <h2 className='profiles-status'>{experiences[0].title}</h2>
+                <h3 style={{ opacity: "0.7" }} className='profiles-status'>
+                  at {experiences[0].company}
+                </h3>
+              </div>
+            )}
           </div>
           <h2 className='profiles-status profiles-status-none'>{status}</h2>
           <h2 className='profiles-status opacity'>{location}</h2>

@@ -157,7 +157,7 @@ export const addExperience = (formData, history) => async dispatch => {
 
     const res = await axios.put("/api/profile/experience", formData, config);
 
-    console.log();
+    console.log(res.data);
 
     dispatch({
       type: UPDATE_PROFILE,

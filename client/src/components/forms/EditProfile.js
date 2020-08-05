@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile, getCurrentProfile } from "../../actions/profile";
@@ -32,7 +32,7 @@ const EditProfile = ({
       githubusername:
         loading || !profile.githubusername ? "" : profile.githubusername
     });
-  }, [loading, getCurrentProfile]);
+  }, [loading, getCurrentProfile, profile]);
 
   const {
     company,
@@ -212,8 +212,7 @@ const EditProfile = ({
               </div>
 
               <div
-                style={{ height: "80px" }}
-                style={{ marginTop: "20px" }}
+                style={{ height: "80px", marginTop: "20px" }}
                 className={`position-profile ${
                   githubusername.length > 1 ? "form-complete" : null
                 }`}
