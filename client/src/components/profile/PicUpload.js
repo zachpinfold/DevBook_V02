@@ -159,11 +159,10 @@ class PicUpload extends Component {
                     style={{ display: "none" }}
                     value={profile_pic}
                     onInput={this.handleFile}
-                    onkeypress='return event.keyCode != 13;'
 
                     // onInput={console.log("input")}
                   />
-                  <label className='custom-file-input' for='img'></label>
+                  <label className='custom-file-input' htmlFor='img'></label>
                 </div>
               )}
           </div>

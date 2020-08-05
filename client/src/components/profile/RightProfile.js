@@ -51,9 +51,9 @@ const RightProfile = ({ user, profile: { profile } }) => {
           <h3 className='profile-sub'>Work Experience</h3>
           <div className='line-break-red'></div>
 
-          {profile.experiences.length > 0 && (
+          {sortedExp.length > 0 && (
             <Fragment>
-              {profile.experiences.map(exp => (
+              {sortedExp.map(exp => (
                 <ProfileExperiences key={exp._id} experience={exp} />
               ))}
             </Fragment>

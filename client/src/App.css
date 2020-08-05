@@ -816,7 +816,7 @@ select {
 }
 
 .cropDiv {
-  /* z-index: 2; */
+  z-index: 2;
   position: fixed;
   /* display: flex; */
   /* overflow: none; */
