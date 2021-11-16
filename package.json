@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/ZachPinfold/DevBook_back_end#readme",
   "dependencies": {
-    "aws-sdk": "^2.719.0",
+    "aws-sdk": "^2.814.0",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.1",
     "express": "^4.17.1",
